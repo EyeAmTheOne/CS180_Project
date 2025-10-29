@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://4v1f6nfxhn7v"]
+
+[ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
+[ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/sprites/Soldier with shadows/Soldier.png" id="1_ulp21"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c3w1"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnvi2"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83hs8"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8kxw"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqcbf"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gskgj"]
+atlas = ExtResource("1_ulp21")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_06mnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c3w1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnvi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83hs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8kxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqcbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gskgj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhpjh"]
+radius = 5.0990195
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3c3w1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_06mnu")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.098680496
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_mhpjh")
