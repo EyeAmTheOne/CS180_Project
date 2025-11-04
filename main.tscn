@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=3 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D"]
 
@@ -12,3 +13,6 @@ position = Vector2(0, -5)
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="Enemy" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(77, 19)
