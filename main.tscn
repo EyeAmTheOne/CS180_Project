@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://components/health.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bypdspei02kv7" path="res://Enemy/enemy.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(28, 28)
 
-[node name="Health" type="Node" parent="Player"]
-script = ExtResource("2_0xm2m")
-metadata/_custom_type_script = "uid://bl7jd0cbw38h"
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -5)
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-20, -13)
