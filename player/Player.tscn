@@ -92,4 +92,5 @@ shape = SubResource("CircleShape2D_x8kxw")
 [node name="Timer" type="Timer" parent="HurtBox"]
 wait_time = 5.0
 
+[connection signal="health_depleted" from="Player_Health" to="." method="_on_player_health_health_depleted"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]

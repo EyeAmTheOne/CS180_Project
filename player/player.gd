@@ -20,3 +20,8 @@ func _physics_process(delta):
 	get_input()
 	get_orientation()
 	move_and_slide()
+
+
+func _on_player_health_health_depleted() -> void:
+	print("YOU HAVE DIED")
+	queue_free()
