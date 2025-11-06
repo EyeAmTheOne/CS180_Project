@@ -19,8 +19,6 @@ Globals --> SceneManager
 SceneManager --> SaveManager
 
 class Player {
-  + take_damage(amount: int)
-  + heal(amount: int)
   + attack()
   + collect(resource: Node)
   + use_item(item_name: String)
@@ -32,6 +30,14 @@ Player ..> CombatManager
 Player ..> SurvivalSystem
 Player ..> HUD
 Player ..> SaveManager
+
+class Health {
+    + take_damage(amount: int)
+    + heal(amount: int)
+}
+
+Health ..> Player
+Health ..> Enemy
 
 class Inventory {
   + add_item(item_name: String, amount: int)
@@ -77,11 +83,11 @@ class CombatManager {
 
 CombatManager ..> Player
 CombatManager ..> Enemy
+CombatManager ..> Health
 CombatManager ..> HUD
 CombatManager ..> SaveManager
 
 class Enemy {
-  + set_target(player: Node)
   + take_damage(amount: int)
 }
 
