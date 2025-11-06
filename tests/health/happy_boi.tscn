@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://26tpleqtrpwb"]
+
+[ext_resource type="Texture2D" uid="uid://bgq4fpiuub8nq" path="res://assets/sprites/Soldier with shadows/Soldier-Idle.png" id="1_0snjd"]
+[ext_resource type="Script" uid="uid://860txsy8h2eu" path="res://systems/health/healbox.gd" id="2_xw6uj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wcng"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icavc"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dq3a"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx5t3"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek74h"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swx08"]
+atlas = ExtResource("1_0snjd")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l83xe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wcng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icavc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dq3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx5t3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek74h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swx08")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nifj"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xvyp0"]
+radius = 7.0
+
+[node name="Happy Boi" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_l83xe")
+frame_progress = 0.8095344
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_1nifj")
+
+[node name="HealBox" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("2_xw6uj")
+metadata/_custom_type_script = "uid://860txsy8h2eu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealBox"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_xvyp0")

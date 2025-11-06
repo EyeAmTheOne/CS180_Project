@@ -6,6 +6,7 @@ extends CharacterBody2D
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
+		
 
 func get_orientation():
 	if velocity[0] > 0:
@@ -19,3 +20,8 @@ func _physics_process(delta):
 	get_input()
 	get_orientation()
 	move_and_slide()
+
+
+func _on_player_health_health_depleted() -> void:
+	print("YOU HAVE DIED")
+	queue_free()

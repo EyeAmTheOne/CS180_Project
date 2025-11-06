@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://bcsksj0i8dyql"]
+
+[ext_resource type="Texture2D" uid="uid://11y5cliyqo8c" path="res://assets/sprites/Orc with shadows/Orc-Attack01.png" id="1_fxr8j"]
+[ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="2_6ofqw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ofqw"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dq2v"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0rfh"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr51a"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mfao"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sutnb"]
+atlas = ExtResource("1_fxr8j")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lswlf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ofqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dq2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0rfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr51a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mfao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sutnb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qy8l7"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dq2v"]
+radius = 7.0
+
+[node name="Angry Enemy" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_lswlf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_qy8l7")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("2_6ofqw")
+metadata/_custom_type_script = "uid://byagfnhocne4h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_3dq2v")
