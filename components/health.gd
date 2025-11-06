@@ -42,7 +42,6 @@ func get_invulnerability() -> bool:
 func set_temporary_invulnerability(time: float):
 	if invulnerability_timer == null:
 		invulnerability_timer = Timer.new()
-		invulnerability_timer.one_shot = true
 		add_child(invulnerability_timer)
 		
 	if invulnerability_timer.timeout.is_connected(set_invulnerability):
@@ -67,6 +66,9 @@ func set_health(value: int):
 		
 		if health == 0:
 			health_depleted.emit()
+			
+		if health > max_health:
+			health = max_health
 	
 func get_health() -> int:
 	return health
