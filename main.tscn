@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=4 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bypdspei02kv7" path="res://Enemy/enemy.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bcsksj0i8dyql" path="res://Enemy/angry_enemy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://26tpleqtrpwb" path="res://Friend/happy_boi.tscn" id="3_1bvp3"]
 
 [node name="Main" type="Node2D"]
 
@@ -14,5 +15,8 @@ zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-20, -13)
+[node name="Angry Enemy" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-39, -1)
+
+[node name="Happy Boi" parent="." instance=ExtResource("3_1bvp3")]
+position = Vector2(107, 0)
