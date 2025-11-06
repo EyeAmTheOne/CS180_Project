@@ -1,0 +1,111 @@
+@startuml
+title Train Trouble
+
+class Globals {
+  + emit_pause()
+  + emit_resume()
+}
+
+class SceneManager {
+  + change_scene(scene_path: String)
+}
+
+class SaveManager {
+  + save_game()
+  + load_game()
+}
+
+Globals --> SceneManager
+SceneManager --> SaveManager
+
+class Player {
+  + take_damage(amount: int)
+  + heal(amount: int)
+  + attack()
+  + collect(resource: Node)
+  + use_item(item_name: String)
+  + get_stats(): Dictionary
+}
+
+Player ..> Inventory
+Player ..> CombatManager
+Player ..> SurvivalSystem
+Player ..> HUD
+Player ..> SaveManager
+
+class Inventory {
+  + add_item(item_name: String, amount: int)
+  + remove_item(item_name: String, amount: int)
+  + has_item(item_name: String, amount: int)
+  + get_item_quantity(item_name: String): int
+  + use_item(item_name: String)
+  + get_all_items(): Dictionary
+}
+
+class ItemDatabase {
+  + get_item_data(item_name: String): Dictionary
+  + get_all_items(): Array
+}
+
+Inventory ..> ItemDatabase
+Inventory ..> HUD
+Inventory ..> SaveManager
+
+class CraftingSystem {
+  + can_craft(recipe_name: String): bool
+  + craft(recipe_name: String)
+  + get_recipe(recipe_name: String): Dictionary
+  + get_all_recipes(): Array
+}
+
+CraftingSystem ..> Inventory
+CraftingSystem ..> ItemDatabase
+CraftingSystem ..> HUD
+
+class ResourceNode {
+  + harvest(player: Node)
+  + get_yield(): Dictionary
+}
+
+ResourceNode ..> Inventory
+ResourceNode ..> Player
+
+class CombatManager {
+  + attack(attacker: Node, target: Node)
+  + apply_damage(target: Node, amount: int)
+}
+
+CombatManager ..> Player
+CombatManager ..> Enemy
+CombatManager ..> HUD
+CombatManager ..> SaveManager
+
+class Enemy {
+  + set_target(player: Node)
+  + take_damage(amount: int)
+}
+
+Enemy ..> CombatManager
+Enemy ..> SaveManager
+
+class SurvivalSystem {
+  + update_survival(delta: float)
+  + apply_effect(effect_name: String, duration: float)
+  + get_stats(): Dictionary
+}
+
+SurvivalSystem ..> Player
+SurvivalSystem ..> HUD
+SurvivalSystem ..> SaveManager
+
+class HUD {
+  + update_health(value: int)
+  + update_stamina(value: int)
+  + update_inventory(items: Dictionary)
+}
+
+HUD ..> Player
+HUD ..> Inventory
+HUD ..> CraftingSystem
+HUD ..> SurvivalSystem
+@enduml
