@@ -78,7 +78,8 @@ func take_damage(amount: int):
 	set_health(get_health() - amount)
 	
 	#Make player invulnerable for 2 seconds
-	set_temporary_invulnerability(inv_time)
+	if !invulnerability:
+		set_temporary_invulnerability(inv_time)
 		
 func heal(amount: int):
 	#Increase player health by given amount
