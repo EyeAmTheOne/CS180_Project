@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bcsksj0i8dyql"]
 
-[ext_resource type="Texture2D" uid="uid://11y5cliyqo8c" path="res://assets/sprites/Orc with shadows/Orc-Attack01.png" id="1_fxr8j"]
+[ext_resource type="Texture2D" uid="uid://11y5cliyqo8c" path="res://assets/art/Orc with shadows/Orc-Attack01.png" id="1_fxr8j"]
 [ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="2_6ofqw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ofqw"]
