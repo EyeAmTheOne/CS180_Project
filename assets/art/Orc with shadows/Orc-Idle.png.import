@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5ysgaqioad6"
-path="res://.godot/imported/Soldier-Attack03.png-bd8560598ef381ab3ef1d189298548e2.ctex"
+uid="uid://mvb417pd2lqb"
+path="res://.godot/imported/Orc-Idle.png-31149455061ebf49a265e4ef1de5b318.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Soldier with shadows/Soldier-Attack03.png"
-dest_files=["res://.godot/imported/Soldier-Attack03.png-bd8560598ef381ab3ef1d189298548e2.ctex"]
+source_file="res://assets/art/Orc with shadows/Orc-Idle.png"
+dest_files=["res://.godot/imported/Orc-Idle.png-31149455061ebf49a265e4ef1de5b318.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
-[ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/sprites/Soldier with shadows/Soldier.png" id="1_ulp21"]
+[ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
 [ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="3_83hs8"]
 [ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_83hs8"]
 

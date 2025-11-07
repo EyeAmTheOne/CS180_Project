@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://26tpleqtrpwb"]
 
-[ext_resource type="Texture2D" uid="uid://bgq4fpiuub8nq" path="res://assets/sprites/Soldier with shadows/Soldier-Idle.png" id="1_0snjd"]
+[ext_resource type="Texture2D" uid="uid://bgq4fpiuub8nq" path="res://assets/art/Soldier with shadows/Soldier-Idle.png" id="1_0snjd"]
 [ext_resource type="Script" uid="uid://860txsy8h2eu" path="res://systems/health/healbox.gd" id="2_xw6uj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wcng"]
