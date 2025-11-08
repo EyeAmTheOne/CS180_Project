@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=14 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
-[ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/sprites/Soldier with shadows/Soldier.png" id="1_ulp21"]
+[ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
+[ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="3_83hs8"]
+[ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_83hs8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c3w1"]
 atlas = ExtResource("1_ulp21")
@@ -54,7 +56,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhpjh"]
-radius = 5.0990195
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8kxw"]
+radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3c3w1")
@@ -69,3 +74,23 @@ frame_progress = 0.098680496
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mhpjh")
+
+[node name="Player_Health" type="Node" parent="."]
+script = ExtResource("3_83hs8")
+metadata/_custom_type_script = "uid://bl7jd0cbw38h"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+script = ExtResource("4_83hs8")
+health = NodePath("../Player_Health")
+metadata/_custom_type_script = "uid://bx0xax2hj2eva"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_x8kxw")
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+wait_time = 5.0
+
+[connection signal="health_depleted" from="Player_Health" to="." method="_on_player_health_health_depleted"]
+[connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]

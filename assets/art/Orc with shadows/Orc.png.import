@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cys27dqxvupja"
-path="res://.godot/imported/Soldier-Walk.png-94cb5fffe171f536a99a334f57d39a3c.ctex"
+uid="uid://chdn70ypttp36"
+path="res://.godot/imported/Orc.png-eaf3cc1f5833772dad043bafeab58ff5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Soldier with shadows/Soldier-Walk.png"
-dest_files=["res://.godot/imported/Soldier-Walk.png-94cb5fffe171f536a99a334f57d39a3c.ctex"]
+source_file="res://assets/art/Orc with shadows/Orc.png"
+dest_files=["res://.godot/imported/Orc.png-eaf3cc1f5833772dad043bafeab58ff5.ctex"]
 
 [params]
 
