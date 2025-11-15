@@ -1,5 +1,4 @@
 extends Node
-# Inventory.gd
 # Manages the player's inventory
 
 # Load the scripts we need
@@ -8,7 +7,7 @@ const Item = preload("res://inventory/Item.gd")
 
 var items = {}
 var max_slots = 20
-var item_database  # Our instance of the database
+var item_database 
 
 func _ready():
 	item_database = ItemDatabaseScript.new()
@@ -37,6 +36,7 @@ func add_item(item_name, amount = 1):
 	print("Added ", amount, " ", item_name)
 	return true
 
+
 func remove_item(item_name, amount = 1):
 	if not items.has(item_name):
 		print("Don't have that item")
@@ -56,15 +56,18 @@ func remove_item(item_name, amount = 1):
 	print("Removed ", amount, " ", item_name)
 	return true
 
+
 func has_item(item_name, amount = 1):
 	if not items.has(item_name):
 		return false
 	return items[item_name].get_quantity() >= amount
 
+
 func get_item_quantity(item_name):
 	if items.has(item_name):
 		return items[item_name].get_quantity()
 	return 0
+
 
 func use_item(item_name):
 	# TODO: Add functionality for using consumables
@@ -75,8 +78,10 @@ func use_item(item_name):
 		return true
 	return false
 
+
 func get_all_items():
 	return items.values()
+
 
 func print_inventory():
 	print("=== Inventory ===")
