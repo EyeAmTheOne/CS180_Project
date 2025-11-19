@@ -1815,3 +1815,4 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAKABoAAAAAAAEAAAAKABoAAAAAAAIAAAAKABo
 tile_set = SubResource("TileSet_1bvp3")
 
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(73, 21)
