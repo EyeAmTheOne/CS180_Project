@@ -27,9 +27,15 @@ func _physics_process(delta):
 	
 	if player_active:
 		if !Input.get_vector("left", "right", "up", "down").is_zero_approx():
-			animated_sprite.play("walk")
+			if Input.is_key_pressed(KEY_E):
+				animated_sprite.play("attack")
+			else:
+				animated_sprite.play("walk")
 		else:
-			animated_sprite.play("idle")
+			if Input.is_key_pressed(KEY_E):
+				animated_sprite.play("attack")
+			else:
+				animated_sprite.play("idle")
 	else:
 		if !player_dead:
 			animated_sprite.play("death")
