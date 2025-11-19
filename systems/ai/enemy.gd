@@ -19,7 +19,7 @@ func get_orientation():
 func _physics_process(delta: float) -> void:
 	# If target exists, move towards target
 	var direction = Vector2(0, 0)
-	if target:
+	if target and position.distance_to(target.position) > 10:
 		animated_sprite.play("Walk")
 		direction = position.direction_to(target.position)
 	else:
