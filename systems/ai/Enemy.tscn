@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b413ipsgp3sfv"]
+[gd_scene load_steps=39 format=3 uid="uid://b413ipsgp3sfv"]
 
 [ext_resource type="Texture2D" uid="uid://mvb417pd2lqb" path="res://assets/art/Orc with shadows/Orc-Idle.png" id="1_nbgo0"]
 [ext_resource type="Script" uid="uid://fqb4iosioeg0" path="res://systems/ai/enemy.gd" id="1_uf005"]
@@ -207,10 +207,86 @@ radius = 69.58448
 
 [sub_resource type="Animation" id="Animation_axoif"]
 resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56666666, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2vaor"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2vaor"]
 _data = {
-&"Attack": SubResource("Animation_axoif")
+&"Attack": SubResource("Animation_axoif"),
+&"RESET": SubResource("Animation_2vaor")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axoif"]
@@ -223,7 +299,7 @@ script = ExtResource("1_uf005")
 sprite_frames = SubResource("SpriteFrames_2vaor")
 animation = &"Attack"
 autoplay = "Idle"
-frame_progress = 0.89344555
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -246,8 +322,7 @@ libraries = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
+monitoring = false
 script = ExtResource("7_axoif")
 metadata/_custom_type_script = "uid://byagfnhocne4h"
 
