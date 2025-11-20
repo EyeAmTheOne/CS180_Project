@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed = 100
 @export var player_active : bool = true
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var hitbox = $HitBox/CollisionShape2D
 
 var player_dead : bool = false
 
@@ -15,9 +16,14 @@ func get_orientation():
 	if velocity[0] > 0:
 		# Look left
 		animated_sprite.flip_h = false
+		#Flip weapon hitbox to the left
+		hitbox.position[0] = abs(hitbox.position[0])
 	elif velocity[0] < 0:
 		# Look right
 		animated_sprite.flip_h = true
+		#Flip weapon hitbox to the right
+		hitbox.position[0] = -abs(hitbox.position[0])
+		
 
 func _physics_process(delta):	
 	if player_active:
@@ -27,13 +33,13 @@ func _physics_process(delta):
 	
 	if player_active:
 		if !Input.get_vector("left", "right", "up", "down").is_zero_approx():
-			if Input.is_key_pressed(KEY_E):
-				animated_sprite.play("attack")
+			if Input.is_action_just_pressed("attack"):
+				attack_animation()
 			else:
 				animated_sprite.play("walk")
 		else:
-			if Input.is_key_pressed(KEY_E):
-				animated_sprite.play("attack")
+			if Input.is_action_just_pressed("attack"):
+				attack_animation()
 			else:
 				animated_sprite.play("idle")
 	else:
@@ -41,6 +47,8 @@ func _physics_process(delta):
 			animated_sprite.play("death")
 			player_dead = true
 
+func attack_animation():
+	animated_sprite.play("attack")
 
 func _on_player_health_health_depleted() -> void:
 	player_active = false
