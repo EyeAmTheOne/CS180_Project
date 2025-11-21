@@ -9,9 +9,8 @@ signal health_depleted
 
 @export var max_health: int = 100 : set = set_max_health, get = get_max_health
 @export var invulnerability: bool = false : set = set_invulnerability, get = get_invulnerability
-
+@export var inv_time: float = 2
 var invulnerability_timer: Timer = null
-var inv_time: float = 2
 
 @onready var health: int = max_health : set = set_health, get = get_health
 

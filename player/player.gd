@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed = 100
 @export var player_active : bool = true
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var animated_player = $AnimationPlayer
 @onready var hitbox = $HitBox/CollisionShape2D
 
 var player_dead : bool = false
