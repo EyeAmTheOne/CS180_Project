@@ -53,6 +53,9 @@ func attack_animation():
 	if current_attack:
 		animated_sprite.play("attack")
 
+func _on_animated_sprite_2d_animation_finished() -> void:
+	current_attack = false
+
 func _on_player_health_health_depleted() -> void:
 	player_active = false
 	print("YOU HAVE DIED")
