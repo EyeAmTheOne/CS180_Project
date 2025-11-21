@@ -25,7 +25,13 @@ func _ready():
 	items["health_potion"] = {
 		"name": "Health Potion",
 		"description": "Restores health",
-		"max_stack": 5
+		"max_stack": 10
+	}
+	
+	items["gold"] = {
+		"name": "gold",
+		"description": "Valuable currency",
+		"max_stack": 999
 	}
 
 func item_exists(item_name):
