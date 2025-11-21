@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://0sbh4k7pxmh2"]
+
+[ext_resource type="Script" uid="uid://cgarvy506snwp" path="res://chest_1.gd" id="1_8qehp"]
+[ext_resource type="Texture2D" uid="uid://ctu0pqogkdxxw" path="res://chest.jpg" id="2_8qehp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nnvrw"]
+radius = 54.748047
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44ud8"]
+size = Vector2(62, 41)
+
+[node name="chest" type="Node2D"]
+script = ExtResource("1_8qehp")
+
+[node name="chest11" type="Sprite2D" parent="."]
+position = Vector2(-194.00002, -215.52339)
+scale = Vector2(0.08965638, 0.08009946)
+texture = ExtResource("2_8qehp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-198.75, -194.25)
+scale = Vector2(0.12785862, 0.11697721)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(37.15046, -177.38501)
+scale = Vector2(0.9999985, 0.9999995)
+shape = SubResource("CircleShape2D_nnvrw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-194, -212)
+shape = SubResource("RectangleShape2D_44ud8")
