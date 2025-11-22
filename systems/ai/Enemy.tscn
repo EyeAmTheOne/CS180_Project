@@ -356,7 +356,11 @@ debug_color = Color(0.3721413, 0.4776044, 1, 0.41960785)
 wait_time = 5.0
 autostart = true
 
+[node name="KeepBody" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
 [connection signal="health_depleted" from="Enemy_Health" to="." method="_on_enemy_health_health_depleted"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
+[connection signal="timeout" from="KeepBody" to="." method="_on_keep_body_timeout"]
