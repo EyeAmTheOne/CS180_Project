@@ -52,7 +52,7 @@ func _physics_process(delta):
 
 func attack_animation():
 	if current_attack:
-		animated_sprite.play("attack")
+		animated_player.play("Attack")
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	current_attack = false

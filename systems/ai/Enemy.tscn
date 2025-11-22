@@ -143,7 +143,7 @@ animations = [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_an13p")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -308,6 +308,7 @@ frame = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_pugj6")
+debug_color = Color(0.5764706, 0.45882353, 0.007843138, 0.41960785)
 
 [node name="Detection" type="Area2D" parent="."]
 collision_layer = 2
@@ -315,9 +316,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
 shape = SubResource("CircleShape2D_i6ko1")
+debug_color = Color(0, 0.6385489, 0.3814576, 0.41960785)
 
-[node name="Health" type="Node" parent="."]
+[node name="Enemy_Health" type="Node" parent="."]
 script = ExtResource("6_cx27q")
+max_health = 50
 inv_time = 0.0
 metadata/_custom_type_script = "uid://bl7jd0cbw38h"
 
@@ -327,6 +330,7 @@ libraries = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_mask = 0
 monitoring = false
 script = ExtResource("7_axoif")
 metadata/_custom_type_script = "uid://byagfnhocne4h"
@@ -334,20 +338,25 @@ metadata/_custom_type_script = "uid://byagfnhocne4h"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(12, -2)
 shape = SubResource("CapsuleShape2D_axoif")
+debug_color = Color(0.9843137, 0, 0.3372549, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("8_2vaor")
-health = NodePath("")
+health = NodePath("../Enemy_Health")
 metadata/_custom_type_script = "uid://bx0xax2hj2eva"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -5)
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_2vaor")
+debug_color = Color(0.3721413, 0.4776044, 1, 0.41960785)
 
 [node name="Timer" type="Timer" parent="HurtBox"]
 wait_time = 5.0
+autostart = true
 
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
+[connection signal="health_depleted" from="Enemy_Health" to="." method="_on_enemy_health_health_depleted"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]

@@ -4,6 +4,7 @@ extends Node
 
 signal max_health_changed(diff: int)
 signal health_changed(diff: int)
+signal damage_taken
 signal health_depleted
 
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcsksj0i8dyql"]
+[gd_scene load_steps=15 format=3 uid="uid://bcsksj0i8dyql"]
 
 [ext_resource type="Texture2D" uid="uid://11y5cliyqo8c" path="res://assets/art/Orc with shadows/Orc-Attack01.png" id="1_fxr8j"]
 [ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="2_6ofqw"]
+[ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="3_qu0ht"]
+[ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_31vnh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ofqw"]
 atlas = ExtResource("1_fxr8j")
@@ -59,6 +61,9 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dq2v"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cl18q"]
+radius = 7.0
+
 [node name="Angry Enemy" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -77,3 +82,27 @@ metadata/_custom_type_script = "uid://byagfnhocne4h"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_3dq2v")
+
+[node name="Test_Enemy_Health" type="Node" parent="."]
+script = ExtResource("3_qu0ht")
+max_health = 50
+inv_time = 0.0
+metadata/_custom_type_script = "uid://bl7jd0cbw38h"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_31vnh")
+health = NodePath("../Test_Enemy_Health")
+metadata/_custom_type_script = "uid://bx0xax2hj2eva"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cl18q")
+debug_color = Color(0.3721413, 0.4776044, 1, 0.41960785)
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
