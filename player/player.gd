@@ -19,12 +19,12 @@ func get_orientation():
 		# Look left
 		animated_sprite.flip_h = false
 		#Flip weapon hitbox to the left
-		#hitbox.position[0] = abs(hitbox.position[0])
+		hitbox.position[0] = abs(hitbox.position[0])
 	elif velocity[0] < 0:
 		# Look right
 		animated_sprite.flip_h = true
 		#Flip weapon hitbox to the right
-		#hitbox.position[0] = -abs(hitbox.position[0])
+		hitbox.position[0] = -abs(hitbox.position[0])
 		
 
 func _physics_process(delta):	
