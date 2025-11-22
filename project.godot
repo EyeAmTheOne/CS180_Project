@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="game demo 1 nov 20"
-run/main_scene="uid://cqow47bch5ocs"
+config/name="TrainTrouble"
+run/main_scene="uid://p448b8thhhhh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://assets/art/icon.svg"
 
