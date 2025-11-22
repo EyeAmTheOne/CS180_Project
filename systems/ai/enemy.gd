@@ -25,6 +25,7 @@ func get_orientation():
 		hitbox.position[0] = -abs(hitbox.position[0])
 
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	# If target exists, move towards target
 	var direction = Vector2(0, 0)

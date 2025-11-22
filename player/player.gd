@@ -31,23 +31,43 @@ func get_orientation():
 func add_wood(amount: int) -> void:
 	wood += amount
 	print("Picked up ", amount, " wood (Total: ", wood, ")")
+<<<<<<< Updated upstream
+=======
+	_show_pickup_popup("+%d wood" % amount)
+>>>>>>> Stashed changes
 
 func add_coal(amount: int) -> void:
 	coal += amount
 	print("Picked up ", amount, " coal (Total: ", coal, ")")
+<<<<<<< Updated upstream
+=======
+	_show_pickup_popup("+%d coal" % amount)
+>>>>>>> Stashed changes
 
 func add_gold(amount: int) -> void:
 	gold += amount
 	print("Picked up ", amount, " gold (Total: ", gold, ")")
+<<<<<<< Updated upstream
+=======
+	_show_pickup_popup("+%d gold" % amount)
+>>>>>>> Stashed changes
 
 func add_metal(amount: int) -> void:
 	metal += amount
 	print("Picked up ", amount, " metal (Total: ", metal, ")")
+<<<<<<< Updated upstream
  
 #### Diego code ends here
 
 
 func _physics_process(delta):	
+=======
+	_show_pickup_popup("+%d metal" % amount)
+#### Diego code ends here
+
+
+func _physics_process(_delta):
+>>>>>>> Stashed changes
 	if player_active:
 		get_input()                         # handle movement input
 		get_orientation()                   # flip sprite based on direction
@@ -84,3 +104,11 @@ func _try_interact() -> void:
 func _on_player_health_health_depleted() -> void:
 	player_active = false
 	print("YOU HAVE DIED")
+	
+### new function 
+# Diego added (shows pick up iteam)
+func _show_pickup_popup(text: String) -> void:
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui:
+		ui.show_pickup(text)
+#### Diego code ends here
