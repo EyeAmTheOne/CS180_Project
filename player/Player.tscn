@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=13 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/sprites/Soldier with shadows/Soldier.png" id="1_ulp21"]
+[ext_resource type="PackedScene" uid="uid://4eouovx8cr2d" path="res://inventory/InventoryUI.tscn" id="3_wnvi2"]
+[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="4_83hs8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c3w1"]
 atlas = ExtResource("1_ulp21")
@@ -56,7 +58,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhpjh"]
 radius = 5.0990195
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_3c3w1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -69,3 +71,8 @@ frame_progress = 0.098680496
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mhpjh")
+
+[node name="InventoryUI" parent="." instance=ExtResource("3_wnvi2")]
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4_83hs8")

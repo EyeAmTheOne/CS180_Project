@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://4eouovx8cr2d"]
+
+[ext_resource type="Script" uid="uid://bjnw6jc3dplbx" path="res://inventory/SimpleInventoryUI.gd" id="1_77we3"]
+
+[node name="CanvasLayer" type="CanvasLayer" groups=["player"]]
+script = ExtResource("1_77we3")
+
+[node name="Hotbar" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 5
+alignment = 1

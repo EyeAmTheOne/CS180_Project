@@ -1,5 +1,6 @@
 extends Node
-# Manages the player's inventory
+
+signal inventory_changed
 
 # Load the scripts we need
 const ItemDatabaseScript = preload("res://inventory/ItemDatabase.gd")
@@ -23,6 +24,7 @@ func add_item(item_name, amount = 1):
 	if items.has(item_name):
 		items[item_name].add(amount)
 		print("Added ", amount, " ", item_name)
+		emit_signal("inventory_changed")  # ADD THIS
 		return true
 	
 	# Check if we have room for a new item type
@@ -34,8 +36,8 @@ func add_item(item_name, amount = 1):
 	var new_item = Item.new(item_name, amount)
 	items[item_name] = new_item
 	print("Added ", amount, " ", item_name)
+	emit_signal("inventory_changed")  # ADD THIS
 	return true
-
 
 func remove_item(item_name, amount = 1):
 	if not items.has(item_name):
@@ -54,20 +56,18 @@ func remove_item(item_name, amount = 1):
 		items.erase(item_name)
 	
 	print("Removed ", amount, " ", item_name)
+	emit_signal("inventory_changed")  # ADD THIS
 	return true
-
 
 func has_item(item_name, amount = 1):
 	if not items.has(item_name):
 		return false
 	return items[item_name].get_quantity() >= amount
 
-
 func get_item_quantity(item_name):
 	if items.has(item_name):
 		return items[item_name].get_quantity()
 	return 0
-
 
 func use_item(item_name):
 	# TODO: Add functionality for using consumables
@@ -78,10 +78,8 @@ func use_item(item_name):
 		return true
 	return false
 
-
 func get_all_items():
 	return items.values()
-
 
 func print_inventory():
 	print("=== Inventory ===")
