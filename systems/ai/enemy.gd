@@ -37,12 +37,14 @@ func _physics_process(delta: float) -> void:
 		if !stun:
 			if target:
 				if position.distance_to(target.position) > 20:
+					cancel_attack()
 					animated_sprite.play("Walk")
 					direction = position.direction_to(target.position)
 				elif !current_attack:
 					current_attack = true
 					animation_player.play("Attack")
 			else:
+				cancel_attack()
 				animated_sprite.play("Idle")
 			
 		velocity = direction * SPEED
@@ -51,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		
 	else:
 		if !enemy_dead:
+			cancel_attack()
 			animated_sprite.play("Death")
 			$KeepBody.start()
 			enemy_dead = true
@@ -83,5 +86,12 @@ func _on_keep_body_timeout() -> void:
 
 func _on_hurt_box_received_damage(damage: int) -> void:
 	if enemy_active:
+		cancel_attack()
 		stun = true
 		animation_player.play("Hurt")
+
+func cancel_attack():
+	if current_attack:
+		print("COUNTER HIT")
+		current_attack = false
+		animation_player.stop()
