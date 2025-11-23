@@ -78,6 +78,9 @@ func _physics_process(delta):
 				animated_sprite.play("idle")
 	else:
 		if !player_dead:
+			if stun:
+				stun = false
+				animated_player.stop()
 			animated_sprite.play("death")
 			player_dead = true
 
@@ -100,14 +103,6 @@ func _try_interact() -> void:
 		if target.has_method("harvest"):
 			target.harvest(self)
 			return
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Attack":
-		current_attack = false
-	elif anim_name == "Hurt":
-		stun = false
-		current_attack = false
-	
 	
 func _on_player_health_health_depleted() -> void:
 	player_active = false
