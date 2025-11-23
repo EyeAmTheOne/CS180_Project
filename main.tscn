@@ -1,13 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=6 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
-[ext_resource type="Script" uid="uid://bi1npit5ir82" path="res://ui/Game Over/game_over_screen.gd" id="4_1bvp3"]
-[ext_resource type="FontFile" uid="uid://ybsfhbty51py" path="res://assets/fonts/ari-w9500.ttf" id="5_7mycd"]
-[ext_resource type="FontFile" uid="uid://bilaty3p683kh" path="res://assets/fonts/ari-w9500-condensed-display.ttf" id="6_272bh"]
-[ext_resource type="Script" uid="uid://bes8dh2r3ud7s" path="res://ui/Game Over/retry_button.gd" id="7_5vw27"]
-[ext_resource type="Script" uid="uid://ygtxc63b0hp8" path="res://ui/Game Over/menu_button.gd" id="8_kek77"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
 texture = ExtResource("2_0xm2m")
@@ -1811,35 +1806,6 @@ separation = Vector2i(1, 1)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lquwl")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmykd"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-shadow_color = Color(0, 0, 0, 0.18039216)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6crx"]
-bg_color = Color(0.3779188, 0.37791887, 0.37791884, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-shadow_color = Color(0, 0, 0, 0.18039216)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg7dm"]
-bg_color = Color(0.66656864, 0.6665687, 0.66656864, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-shadow_color = Color(0, 0, 0, 0.18039216)
-shadow_size = 5
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_khj84"]
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -1862,82 +1828,3 @@ tile_set = SubResource("TileSet_1bvp3")
 
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(171, 46)
-
-[node name="GameOverScreen" type="CanvasLayer" parent="."]
-process_mode = 2
-script = ExtResource("4_1bvp3")
-
-[node name="Panel" type="Panel" parent="GameOverScreen"]
-anchors_preset = -1
-anchor_left = -0.142
-anchor_top = -0.156
-anchor_right = 0.19500001
-anchor_bottom = 0.23600002
-offset_left = 163.584
-offset_top = 101.088005
-offset_right = 925.36
-offset_bottom = 497.072
-
-[node name="Label" type="Label" parent="GameOverScreen"]
-offset_left = 300.0
-offset_top = 100.0
-offset_right = 800.0
-offset_bottom = 200.0
-theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
-theme_override_fonts/font = ExtResource("5_7mycd")
-theme_override_font_sizes/font_size = 60
-text = "Game Over"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RetryButton" type="Button" parent="GameOverScreen"]
-offset_left = 200.0
-offset_top = 450.0
-offset_right = 400.0
-offset_bottom = 550.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.003519184, 0.00351916, 0.0035191686, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_272bh")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_hmykd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a6crx")
-theme_override_styles/hover = SubResource("StyleBoxFlat_eg7dm")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_khj84")
-text = "Retry"
-script = ExtResource("7_5vw27")
-
-[node name="RetryButtonShowUpTimer" type="Timer" parent="GameOverScreen/RetryButton"]
-
-[node name="MenuButton" type="Button" parent="GameOverScreen"]
-offset_left = 700.0
-offset_top = 450.0
-offset_right = 900.0
-offset_bottom = 550.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.003519184, 0.00351916, 0.0035191686, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_272bh")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_hmykd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a6crx")
-theme_override_styles/hover = SubResource("StyleBoxFlat_eg7dm")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_khj84")
-text = "Menu"
-script = ExtResource("8_kek77")
-
-[node name="MenuButtonShowUpTimer" type="Timer" parent="GameOverScreen/MenuButton"]
-wait_time = 1.25
-
-[node name="GameOverScreenShowUpTimer" type="Timer" parent="GameOverScreen"]
-wait_time = 1.5
-
-[connection signal="pressed" from="GameOverScreen/RetryButton" to="GameOverScreen" method="_on_retry_button_pressed"]
-[connection signal="timeout" from="GameOverScreen/RetryButton/RetryButtonShowUpTimer" to="GameOverScreen/RetryButton" method="_on_retry_button_show_up_timer_timeout"]
-[connection signal="pressed" from="GameOverScreen/MenuButton" to="GameOverScreen" method="_on_menu_button_pressed"]
-[connection signal="timeout" from="GameOverScreen/MenuButton/MenuButtonShowUpTimer" to="GameOverScreen/MenuButton" method="_on_menu_button_show_up_timer_timeout"]
-[connection signal="timeout" from="GameOverScreen/GameOverScreenShowUpTimer" to="GameOverScreen" method="_on_game_over_screen_show_up_timer_timeout"]
