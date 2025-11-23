@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bqyussd6573rv"]
+[gd_scene load_steps=8 format=4 uid="uid://cn7c2g30ui47d"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_1tnoa"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_qcaji"]
@@ -1826,27 +1826,35 @@ separation = Vector2i(1, 0)
 14:0/size_in_atlas = Vector2i(1, 2)
 14:0/0 = 0
 14:0/0/texture_origin = Vector2i(0, 8)
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 10:1/size_in_atlas = Vector2i(1, 2)
 10:1/0 = 0
 10:1/0/texture_origin = Vector2i(0, 8)
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 5:1/size_in_atlas = Vector2i(1, 2)
 5:1/0 = 0
 5:1/0/texture_origin = Vector2i(0, 8)
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 4:1/size_in_atlas = Vector2i(1, 2)
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, 8)
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 3:1/size_in_atlas = Vector2i(1, 2)
 3:1/0 = 0
 3:1/0/texture_origin = Vector2i(0, 8)
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 2:1/size_in_atlas = Vector2i(1, 2)
 2:1/0 = 0
 2:1/0/texture_origin = Vector2i(0, 8)
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 1:1/size_in_atlas = Vector2i(1, 2)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 8)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 0:1/size_in_atlas = Vector2i(1, 2)
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 8)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 6:1/0 = 0
 6:2/0 = 0
 7:1/0 = 0
@@ -1862,22 +1870,14 @@ separation = Vector2i(1, 0)
 13:1/0 = 0
 13:2/0 = 0
 14:2/0 = 0
+14:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660181, 2.8427153, 1.1690807, 2.8777409, 2.6079502, 8, -2.607952, 8)
 
 [sub_resource type="TileSet" id="TileSet_0wlj7"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ahhnx")
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("1_1tnoa")]
-y_sort_enabled = true
-position = Vector2(18, 49)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -5)
-zoom = Vector2(3, 3)
-process_callback = 0
-position_smoothing_enabled = true
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
@@ -1889,3 +1889,13 @@ tile_set = SubResource("TileSet_ahhnx")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAEAAIAAAAAAAEAAAAJAAMAAAADAAEAAAAGAAUAAAADAAEAAAALAAcAAAADAAEAAAABAAcAAAADAAEAAAADAAUAAAADAAEAAAAFAAYAAAADAAEAAAAMAAMAAAADAAEAAAAKAAEAAAADAAEAAAAHAAIAAAADAAEAAAA=")
 tile_set = SubResource("TileSet_0wlj7")
+
+[node name="Player" parent="." instance=ExtResource("1_1tnoa")]
+y_sort_enabled = true
+position = Vector2(18, 49)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -5)
+zoom = Vector2(3, 3)
+process_callback = 0
+position_smoothing_enabled = true
