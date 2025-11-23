@@ -9,8 +9,6 @@
 [ext_resource type="Script" uid="uid://bes8dh2r3ud7s" path="res://ui/Game Over/retry_button.gd" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://ygtxc63b0hp8" path="res://ui/Game Over/menu_button.gd" id="8_kek77"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
 texture = ExtResource("2_0xm2m")
 separation = Vector2i(1, 1)
@@ -1855,11 +1853,6 @@ position = Vector2(0, -5)
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
-
-[node name="InteractArea" type="Area2D" parent="Player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/InteractArea"]
-shape = SubResource("CircleShape2D_1bvp3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
