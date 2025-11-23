@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=57 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
@@ -9,7 +9,12 @@
 [ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_83hs8"]
 [ext_resource type="Texture2D" uid="uid://br8302mrj1acm" path="res://assets/art/Soldier with shadows/Soldier-Hurt.png" id="4_mhpjh"]
 [ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="8_06mnu"]
-[ext_resource type="Script" path="res://ui/ui.gd" id="10_ndjxb"]
+[ext_resource type="Script" uid="uid://cy0stvbbrrcb1" path="res://ui/ui.gd" id="10_ndjxb"]
+[ext_resource type="Script" uid="uid://bi1npit5ir82" path="res://ui/Game Over/game_over_screen.gd" id="11_v4f8b"]
+[ext_resource type="FontFile" uid="uid://ybsfhbty51py" path="res://assets/fonts/ari-w9500.ttf" id="12_t8epa"]
+[ext_resource type="FontFile" uid="uid://bilaty3p683kh" path="res://assets/fonts/ari-w9500-condensed-display.ttf" id="13_w24id"]
+[ext_resource type="Script" uid="uid://bes8dh2r3ud7s" path="res://ui/Game Over/retry_button.gd" id="14_uewl2"]
+[ext_resource type="Script" uid="uid://ygtxc63b0hp8" path="res://ui/Game Over/menu_button.gd" id="15_ofhxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu5hk"]
 atlas = ExtResource("2_gskgj")
@@ -358,6 +363,35 @@ radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ndjxb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yu5hk"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.18039216)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6miu"]
+bg_color = Color(0.3779188, 0.37791887, 0.37791884, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.18039216)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlfor"]
+bg_color = Color(0.66656864, 0.6665687, 0.66656864, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.18039216)
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2m0d2"]
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
 motion_mode = 1
@@ -434,8 +468,87 @@ offset_bottom = 72.112
 theme_override_font_sizes/font_size = 30
 metadata/_edit_use_anchors_ = true
 
+[node name="GameOverScreen" type="CanvasLayer" parent="."]
+process_mode = 2
+script = ExtResource("11_v4f8b")
+
+[node name="Panel" type="Panel" parent="GameOverScreen"]
+anchors_preset = -1
+anchor_left = -0.142
+anchor_top = -0.156
+anchor_right = 0.19500001
+anchor_bottom = 0.23600002
+offset_left = 163.584
+offset_top = 101.088005
+offset_right = 925.36
+offset_bottom = 497.072
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+offset_left = 300.0
+offset_top = 100.0
+offset_right = 800.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_fonts/font = ExtResource("12_t8epa")
+theme_override_font_sizes/font_size = 60
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOverScreen"]
+offset_left = 200.0
+offset_top = 450.0
+offset_right = 400.0
+offset_bottom = 550.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.003519184, 0.00351916, 0.0035191686, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_w24id")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_yu5hk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q6miu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mlfor")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2m0d2")
+text = "Retry"
+script = ExtResource("14_uewl2")
+
+[node name="RetryButtonShowUpTimer" type="Timer" parent="GameOverScreen/RetryButton"]
+
+[node name="MenuButton" type="Button" parent="GameOverScreen"]
+offset_left = 700.0
+offset_top = 450.0
+offset_right = 900.0
+offset_bottom = 550.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.003519184, 0.00351916, 0.0035191686, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_w24id")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_yu5hk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q6miu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mlfor")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2m0d2")
+text = "Menu"
+script = ExtResource("15_ofhxi")
+
+[node name="MenuButtonShowUpTimer" type="Timer" parent="GameOverScreen/MenuButton"]
+wait_time = 1.25
+
+[node name="GameOverScreenShowUpTimer" type="Timer" parent="GameOverScreen"]
+wait_time = 1.5
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="health_depleted" from="Player_Health" to="." method="_on_player_health_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="received_damage" from="HurtBox" to="." method="_on_hurt_box_received_damage"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOverScreen/RetryButton" to="GameOverScreen" method="_on_retry_button_pressed"]
+[connection signal="timeout" from="GameOverScreen/RetryButton/RetryButtonShowUpTimer" to="GameOverScreen/RetryButton" method="_on_retry_button_show_up_timer_timeout"]
+[connection signal="pressed" from="GameOverScreen/MenuButton" to="GameOverScreen" method="_on_menu_button_pressed"]
+[connection signal="timeout" from="GameOverScreen/MenuButton/MenuButtonShowUpTimer" to="GameOverScreen/MenuButton" method="_on_menu_button_show_up_timer_timeout"]
+[connection signal="timeout" from="GameOverScreen/GameOverScreenShowUpTimer" to="GameOverScreen" method="_on_game_over_screen_show_up_timer_timeout"]
