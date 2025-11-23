@@ -102,7 +102,7 @@ func _try_interact() -> void:
 
 func _on_player_health_health_depleted() -> void:
 	player_active = false
-	get_node("GameOverScreen").game_over()
+	get_node("../GameOverScreen").game_over()
 
 func _on_hurt_box_received_damage(damage: int) -> void:
 	if player_active:
