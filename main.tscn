@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=17 format=4 uid="uid://cqow47bch5ocs"]
 
+[ext_resource type="Script" uid="uid://bjobyb6wmrukv" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="2_1bvp3"]
@@ -2157,6 +2158,7 @@ size = Vector2(68, 6)
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_7mycd")
 
 [node name="Map" type="Node2D" parent="."]
 y_sort_enabled = true
