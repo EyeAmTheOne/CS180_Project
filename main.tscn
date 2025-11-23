@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=9 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bi1npit5ir82" path="res://ui/Game Over/game_over_screen.gd" id="4_1bvp3"]
+[ext_resource type="FontFile" uid="uid://ybsfhbty51py" path="res://assets/fonts/ari-w9500.ttf" id="5_7mycd"]
+[ext_resource type="FontFile" uid="uid://bilaty3p683kh" path="res://assets/fonts/ari-w9500-condensed-display.ttf" id="6_272bh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2yge"]
 texture = ExtResource("2_0xm2m")
@@ -1850,6 +1852,7 @@ offset_top = 100.0
 offset_right = 800.0
 offset_bottom = 200.0
 theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_fonts/font = ExtResource("5_7mycd")
 theme_override_font_sizes/font_size = 60
 text = "Game Over"
 horizontal_alignment = 1
@@ -1860,6 +1863,7 @@ offset_left = 200.0
 offset_top = 450.0
 offset_right = 400.0
 offset_bottom = 550.0
+theme_override_fonts/font = ExtResource("6_272bh")
 theme_override_font_sizes/font_size = 32
 text = "Retry"
 
@@ -1868,6 +1872,7 @@ offset_left = 700.0
 offset_top = 450.0
 offset_right = 900.0
 offset_bottom = 550.0
+theme_override_fonts/font = ExtResource("6_272bh")
 theme_override_font_sizes/font_size = 32
 text = "Menu"
 
