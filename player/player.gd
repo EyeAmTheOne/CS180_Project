@@ -66,7 +66,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	
 func _on_player_health_health_depleted() -> void:
 	player_active = false
-	print("YOU HAVE DIED")
+	get_node("../GameOverScreen").game_over()
 
 
 func _on_hurt_box_received_damage(damage: int) -> void:

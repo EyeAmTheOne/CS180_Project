@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=7 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bi1npit5ir82" path="res://ui/Game Over/game_over_screen.gd" id="4_1bvp3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2yge"]
 texture = ExtResource("2_0xm2m")
@@ -1810,6 +1811,7 @@ sources/0 = SubResource("TileSetAtlasSource_h2yge")
 y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+process_mode = 3
 y_sort_enabled = true
 position = Vector2(28, 28)
 
@@ -1828,6 +1830,8 @@ tile_set = SubResource("TileSet_1bvp3")
 position = Vector2(171, 46)
 
 [node name="GameOverScreen" type="CanvasLayer" parent="."]
+process_mode = 2
+script = ExtResource("4_1bvp3")
 
 [node name="Panel" type="Panel" parent="GameOverScreen"]
 anchors_preset = -1
@@ -1866,3 +1870,6 @@ offset_right = 900.0
 offset_bottom = 550.0
 theme_override_font_sizes/font_size = 32
 text = "Menu"
+
+[connection signal="pressed" from="GameOverScreen/RetryButton" to="GameOverScreen" method="_on_retry_button_pressed"]
+[connection signal="pressed" from="GameOverScreen/MenuButton" to="GameOverScreen" method="_on_menu_button_pressed"]

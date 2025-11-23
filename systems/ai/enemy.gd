@@ -81,6 +81,6 @@ func _on_keep_body_timeout() -> void:
 
 
 func _on_hurt_box_received_damage(damage: int) -> void:
-	if enemy_active:
+	if enemy_active and !current_attack:
 		stun = true
 		animation_player.play("Hurt")
