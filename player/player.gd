@@ -8,11 +8,12 @@ extends CharacterBody2D
 
 var player_dead : bool = false
 var current_attack : bool = false
+var stun : bool = false
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
-	
+
 
 func get_orientation():
 	if velocity[0] > 0:
@@ -32,15 +33,14 @@ func _physics_process(delta):
 		get_input()
 		get_orientation()
 
-		if !current_attack:
+		if !current_attack and !stun:
 			if Input.is_action_just_pressed("attack"):
 				current_attack = true
 				attack_animation()
-				
 
 		move_and_slide()
 
-		if !current_attack:
+		if !current_attack and !stun:
 			if !Input.get_vector("left", "right", "up", "down").is_zero_approx():
 				animated_sprite.play("walk")
 			else:
@@ -50,13 +50,26 @@ func _physics_process(delta):
 			animated_sprite.play("death")
 			player_dead = true
 
+
 func attack_animation():
 	if current_attack:
 		animated_player.play("Attack")
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	current_attack = false
 
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Attack":
+		current_attack = false
+	elif anim_name == "Hurt":
+		stun = false
+		print(stun)
+	
+	
 func _on_player_health_health_depleted() -> void:
 	player_active = false
 	print("YOU HAVE DIED")
+
+
+func _on_hurt_box_received_damage(damage: int) -> void:
+	stun = true
+	print(stun)
+	animated_player.play("Hurt")
