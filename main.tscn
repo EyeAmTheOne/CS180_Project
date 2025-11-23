@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=16 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bkx156j7tqwe0" path="res://scene_manager.gd" id="3_lquwl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
 
@@ -2151,6 +2152,9 @@ separation = Vector2i(1, 0)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_272bh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(64, 5)
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -2161,7 +2165,7 @@ y_sort_enabled = true
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Borders"]
-position = Vector2(112, 210)
+position = Vector2(112, 223)
 shape = SubResource("RectangleShape2D_lquwl")
 
 [node name="LeftBorder" type="CollisionShape2D" parent="Map/Borders"]
@@ -2194,7 +2198,14 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAJAAMAAAADAAEAAAALAAcAAAADAAEAAAABAAcAAAADAAEAAAADAAUAAAADAAEAAAAMAAMAAAADAAEAAAAKAAEAAAADAAEAAAABAAQAAAAJAAIAAAD+/wIAAAAJAAIAAAD8/wYAAAAJAAIAAAABAAsAAAADAAEAAAD4/wcAAAAJAAIAAAD8//z/AAAJAAIAAAASAPz/AAAJAAIAAAALAPz/AAAJAAIAAAAKAPz/AAAJAAIAAAAVAP7/AAAJAAIAAAASAAsAAAADAAEAAAAMAAoAAAAJAAIAAAAVAP3/AAAAAAEAAAARAPz/AAAAAAEAAAAPAPz/AAAAAAEAAAAEAP7/AAAAAAEAAAD8/wMAAAAAAAEAAAD//wYAAAAAAAEAAAD3/wYAAAAAAAEAAAD2/w0AAAAAAAEAAAD9/w0AAAAAAAEAAAAQAAsAAAAAAAEAAAAWAAcAAAAAAAEAAAAWAAMAAAAAAAEAAAD///3/AAADAAEAAAANAAkAAAADAAEAAAAXAAQAAAADAAEAAAARAP//AAADAAEAAAACAPv/AAADAAEAAAD2//z/AAADAAEAAAD6/wUAAAAMAAEAAAD9////AAAMAAEAAAAOAAkAAAAMAAEAAAAWAAAAAAAMAAEAAAASAAYAAAANAAIAAAAUAAkAAAANAAIAAAD6/wMAAAALAAAAAAD7//r/AAALAAAAAAATAP7/AAALAAAAAAATAAMAAAAMAAIAAAD8/woAAAAMAAIAAAD4/wsAAAANAAIAAAAMAAwAAAADAAEAAAANAAwAAAAAAAEAAAAOAAwAAAADAAEAAAAPAAwAAAADAAEAAAAQAAwAAAADAAEAAAARAAwAAAAAAAEAAAASAAwAAAAAAAEAAAATAAwAAAADAAEAAAAUAAwAAAADAAEAAAAVAAwAAAADAAEAAAAWAAwAAAADAAEAAAAWAAsAAAADAAEAAAAVAAsAAAAAAAEAAAAUAAsAAAAAAAEAAAATAAsAAAADAAEAAAAEAAwAAAAAAAEAAAADAAwAAAAAAAEAAAACAAwAAAADAAEAAAABAAwAAAADAAEAAAACAAsAAAADAAEAAAACAAoAAAADAAEAAAAAAAwAAAADAAEAAAADAA0AAAADAAEAAAACAA0AAAADAAEAAAD//wwAAAADAAEAAAD//wsAAAADAAEAAAAMAA0AAAAAAAEAAAALAA0AAAAAAAEAAAAKAA0AAAAAAAEAAAAKAAwAAAADAAEAAAAJAAwAAAADAAEAAAALAAwAAAAAAAEAAAAJAA0AAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_5vw27")
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Area2D" type="Area2D" parent="Map"]
+script = ExtResource("3_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Area2D"]
+position = Vector2(112, 210.5)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_ig7tw")]
 y_sort_enabled = true
 position = Vector2(105, -27)
 
@@ -2211,3 +2222,5 @@ position_smoothing_enabled = true
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
 y_sort_enabled = true
 position = Vector2(170, 51)
+
+[connection signal="body_entered" from="Map/Area2D" to="Map/Area2D" method="_on_body_entered"]
