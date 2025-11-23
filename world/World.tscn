@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://btfpx2ywg7j7f"]
+[gd_scene load_steps=9 format=4 uid="uid://btfpx2ywg7j7f"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_1tnoa"]
+[ext_resource type="Script" uid="uid://dq7boqilbwhbj" path="res://world/world.gd" id="1_5hvw7"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_qcaji"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="3_qcaji"]
 
@@ -2136,6 +2137,7 @@ sources/0 = SubResource("TileSetAtlasSource_ahhnx")
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_5hvw7")
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
@@ -2165,3 +2167,8 @@ process_callback = 0
 limit_top = -50
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="EntranceMarkers" type="Node2D" parent="."]
+
+[node name="Main" type="Marker2D" parent="EntranceMarkers"]
+position = Vector2(105, 16)
