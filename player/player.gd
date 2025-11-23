@@ -28,7 +28,7 @@ func get_orientation():
 		hitbox.position[0] = -abs(hitbox.position[0])
 		
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if player_active:
 		get_input()
 		get_orientation()
@@ -61,6 +61,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		current_attack = false
 	elif anim_name == "Hurt":
 		stun = false
+		current_attack = false
 		print(stun)
 	
 	
