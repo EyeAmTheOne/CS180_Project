@@ -15,5 +15,11 @@ func _on_menu_button_pressed() -> void:
 	
 	
 func game_over():
-	self.show()
 	get_tree().paused = true
+	get_node("GameOverScreenShowUpTimer").start()
+
+
+func _on_game_over_screen_show_up_timer_timeout() -> void:
+	self.show()
+	get_node("RetryButton/RetryButtonShowUpTimer").start()
+	get_node("MenuButton/MenuButtonShowUpTimer").start()
