@@ -8,6 +8,8 @@ extends CharacterBody2D
 const SPEED = 50
 
 var enemy_dead : bool = false
+var current_attack : bool = false
+var stun : bool = false
 var target = null
 
 func set_target(player: Node2D):
@@ -31,14 +33,16 @@ func _physics_process(delta: float) -> void:
 	if enemy_active:
 		# If target exists, move towards target
 		var direction = Vector2(0, 0)
-		if target:
-			if position.distance_to(target.position) > 20:
-				animated_sprite.play("Walk")
-				direction = position.direction_to(target.position)
+		if !stun:
+			if target:
+				if position.distance_to(target.position) > 20:
+					animated_sprite.play("Walk")
+					direction = position.direction_to(target.position)
+				elif !current_attack:
+					current_attack = true
+					animation_player.play("Attack")
 			else:
-				animation_player.play("Attack")
-		else:
-			animated_sprite.play("Idle")
+				animated_sprite.play("Idle")
 			
 		velocity = direction * SPEED
 		get_orientation()
@@ -64,5 +68,19 @@ func _on_enemy_health_health_depleted() -> void:
 	enemy_active = false
 
 
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Attack":
+		current_attack = false
+	elif anim_name == "Hurt":
+		stun = false
+		current_attack = false
+
+
 func _on_keep_body_timeout() -> void:
 	queue_free()
+
+
+func _on_hurt_box_received_damage(damage: int) -> void:
+	if enemy_active:
+		stun = true
+		animation_player.play("Hurt")

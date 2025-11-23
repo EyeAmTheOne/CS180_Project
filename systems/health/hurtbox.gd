@@ -23,6 +23,7 @@ func _on_area_entered_HIT(hitbox: HitBox) -> void:
 	if hitbox != null:
 		health.take_damage(hitbox.damage)
 		print("DAMAGED: ", hitbox.damage)
+		received_damage.emit(hitbox.damage)
 		
 func _on_area_entered_HEAL(healbox: HealBox) -> void:
 	if healbox != null:
