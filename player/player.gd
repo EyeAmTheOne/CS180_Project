@@ -62,7 +62,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == "Hurt":
 		stun = false
 		current_attack = false
-		print(stun)
 	
 	
 func _on_player_health_health_depleted() -> void:
@@ -71,6 +70,6 @@ func _on_player_health_health_depleted() -> void:
 
 
 func _on_hurt_box_received_damage(damage: int) -> void:
-	stun = true
-	print(stun)
-	animated_player.play("Hurt")
+	if player_active:
+		stun = true
+		animated_player.play("Hurt")
