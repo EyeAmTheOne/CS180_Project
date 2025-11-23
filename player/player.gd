@@ -15,6 +15,7 @@ var wood: int = 0
 var coal: int = 0
 var gold: int = 0
 var metal: int = 0
+#### Diego code ends here
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -99,6 +100,7 @@ func _try_interact() -> void:
 		if target.has_method("harvest"):
 			target.harvest(self)
 			return
+#### Diego code ends here
 
 func _on_player_health_health_depleted() -> void:
 	player_active = false
@@ -112,5 +114,4 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 # Diego: show UI popup when picking up items
 func _show_pickup_popup(text: String) -> void:
 	var ui = get_tree().get_first_node_in_group("ui")
-	if ui:
-		ui.show_pickup(text)
+	if
