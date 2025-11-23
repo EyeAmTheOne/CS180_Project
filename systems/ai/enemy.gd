@@ -75,6 +75,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		stun = false
 		current_attack = false
 
+
 func _on_keep_body_timeout() -> void:
 	queue_free()
 
