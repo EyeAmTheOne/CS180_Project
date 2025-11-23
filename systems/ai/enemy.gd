@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@export var enemy_active : bool = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var character = $"."
@@ -6,6 +7,9 @@ extends CharacterBody2D
 
 const SPEED = 50
 
+var enemy_dead : bool = false
+var current_attack : bool = false
+var stun : bool = false
 var target = null
 
 func set_target(player: Node2D):
@@ -27,20 +31,29 @@ func get_orientation():
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
-	# If target exists, move towards target
-	var direction = Vector2(0, 0)
-	if target:
-		if position.distance_to(target.position) > 20:
-			animated_sprite.play("Walk")
-			direction = position.direction_to(target.position)
-		else:
-			animation_player.play("Attack")
-	else:
-		animated_sprite.play("Idle")
+	if enemy_active:
+		# If target exists, move towards target
+		var direction = Vector2(0, 0)
+		if !stun:
+			if target:
+				if position.distance_to(target.position) > 20:
+					animated_sprite.play("Walk")
+					direction = position.direction_to(target.position)
+				elif !current_attack:
+					current_attack = true
+					animation_player.play("Attack")
+			else:
+				animated_sprite.play("Idle")
+			
+		velocity = direction * SPEED
+		get_orientation()
+		move_and_slide()
 		
-	velocity = direction * SPEED
-	get_orientation()
-	move_and_slide()
+	else:
+		if !enemy_dead:
+			animated_sprite.play("Death")
+			$KeepBody.start()
+			enemy_dead = true
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
@@ -50,3 +63,25 @@ func _on_detection_body_entered(body: Node2D) -> void:
 func _on_detection_body_exited(body: Node2D) -> void:
 	if body == target:
 		target = null
+
+
+func _on_enemy_health_health_depleted() -> void:
+	enemy_active = false
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Attack":
+		current_attack = false
+	elif anim_name == "Hurt":
+		stun = false
+		current_attack = false
+
+
+func _on_keep_body_timeout() -> void:
+	queue_free()
+
+
+func _on_hurt_box_received_damage(damage: int) -> void:
+	if enemy_active:
+		stun = true
+		animation_player.play("Hurt")

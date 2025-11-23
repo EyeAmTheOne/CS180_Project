@@ -4,14 +4,14 @@ extends Node
 
 signal max_health_changed(diff: int)
 signal health_changed(diff: int)
+signal damage_taken
 signal health_depleted
 
 
 @export var max_health: int = 100 : set = set_max_health, get = get_max_health
 @export var invulnerability: bool = false : set = set_invulnerability, get = get_invulnerability
-
+@export var inv_time: float = 2
 var invulnerability_timer: Timer = null
-var inv_time: float = 2
 
 @onready var health: int = max_health : set = set_health, get = get_health
 
@@ -63,6 +63,9 @@ func set_health(value: int):
 		var difference = clamped_value - health
 		health = value
 		health_changed.emit(difference)
+		
+		if health < 0:
+			health = 0
 		
 		if health == 0:
 			health_depleted.emit()

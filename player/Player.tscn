@@ -1,11 +1,38 @@
-[gd_scene load_steps=28 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=46 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
 [ext_resource type="Texture2D" uid="uid://dvioeg68lyb7l" path="res://assets/art/Soldier with shadows/Soldier-Death.png" id="2_aqcbf"]
+[ext_resource type="Texture2D" uid="uid://5dwt01tqp064" path="res://assets/art/Soldier with shadows/Soldier-Attack01.png" id="2_gskgj"]
 [ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="3_83hs8"]
 [ext_resource type="Texture2D" uid="uid://cys27dqxvupja" path="res://assets/art/Soldier with shadows/Soldier-Walk.png" id="3_x8kxw"]
 [ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_83hs8"]
+[ext_resource type="Texture2D" uid="uid://br8302mrj1acm" path="res://assets/art/Soldier with shadows/Soldier-Hurt.png" id="4_mhpjh"]
+[ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="8_06mnu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu5hk"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6miu"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlfor"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m0d2"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nth8"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tqfn"]
+atlas = ExtResource("2_gskgj")
+region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8epa"]
 atlas = ExtResource("2_aqcbf")
@@ -21,6 +48,22 @@ region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofhxi"]
 atlas = ExtResource("2_aqcbf")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stbqk"]
+atlas = ExtResource("4_mhpjh")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y617q"]
+atlas = ExtResource("4_mhpjh")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eyfg"]
+atlas = ExtResource("4_mhpjh")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76mgg"]
+atlas = ExtResource("4_mhpjh")
 region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c3w1"]
@@ -83,6 +126,29 @@ region = Rect2(700, 0, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yu5hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6miu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlfor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m0d2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nth8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tqfn")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_t8epa")
 }, {
 "duration": 1.0,
@@ -96,6 +162,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stbqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y617q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eyfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76mgg")
+}],
+"loop": false,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -154,6 +237,121 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhpjh"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_06mnu"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_mhpjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ndjxb"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.13333334, 0.36666667, 0.5666667, 0.76666665, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 3, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ndjxb"]
+_data = {
+&"Attack": SubResource("Animation_06mnu"),
+&"Hurt": SubResource("Animation_ndjxb"),
+&"RESET": SubResource("Animation_mhpjh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06mnu"]
+radius = 8.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_x8kxw"]
 radius = 7.0
 
@@ -165,16 +363,35 @@ script = ExtResource("1_3c3w1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_06mnu")
-animation = &"death"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mhpjh")
+debug_color = Color(0.5764706, 0.45882353, 0.007843138, 0.41960785)
 
 [node name="Player_Health" type="Node" parent="."]
 script = ExtResource("3_83hs8")
 metadata/_custom_type_script = "uid://bl7jd0cbw38h"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ndjxb")
+}
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+script = ExtResource("8_06mnu")
+damage = 50
+metadata/_custom_type_script = "uid://byagfnhocne4h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(13, -8)
+shape = SubResource("CircleShape2D_06mnu")
+debug_color = Color(0.9856358, 0, 0.3364458, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 0
@@ -185,9 +402,14 @@ metadata/_custom_type_script = "uid://bx0xax2hj2eva"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_x8kxw")
+debug_color = Color(0.37254903, 0.47843137, 1, 0.41960785)
 
 [node name="Timer" type="Timer" parent="HurtBox"]
 wait_time = 5.0
+autostart = true
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="health_depleted" from="Player_Health" to="." method="_on_player_health_health_depleted"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="received_damage" from="HurtBox" to="." method="_on_hurt_box_received_damage"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
