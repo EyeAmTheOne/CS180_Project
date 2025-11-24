@@ -471,6 +471,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GameOverScreen" type="CanvasLayer" parent="."]
 process_mode = 2
+visible = false
 script = ExtResource("11_v4f8b")
 
 [node name="Panel" type="Panel" parent="GameOverScreen"]
