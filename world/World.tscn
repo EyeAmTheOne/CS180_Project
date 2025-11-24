@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://btfpx2ywg7j7f"]
+[gd_scene load_steps=13 format=4 uid="uid://btfpx2ywg7j7f"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_1tnoa"]
 [ext_resource type="Script" uid="uid://dq7boqilbwhbj" path="res://world/world.gd" id="1_5hvw7"]
+[ext_resource type="Script" uid="uid://ccknrgqekbvss" path="res://player/PlayerCamera.gd" id="2_0wlj7"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_qcaji"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="3_qcaji"]
 [ext_resource type="Script" uid="uid://bkx156j7tqwe0" path="res://core/scene_trigger.gd" id="4_ahhnx"]
+[ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="7_dodpj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hvw7"]
 texture = ExtResource("2_qcaji")
@@ -2143,6 +2145,15 @@ size = Vector2(48, 11)
 y_sort_enabled = true
 script = ExtResource("1_5hvw7")
 
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(105, 16)
+zoom = Vector2(3, 3)
+process_callback = 0
+limit_top = -50
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("2_0wlj7")
+
 [node name="Map" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -2176,17 +2187,18 @@ shape = SubResource("RectangleShape2D_0wlj7")
 y_sort_enabled = true
 position = Vector2(18, 49)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -5)
-zoom = Vector2(3, 3)
-process_callback = 0
-limit_top = -50
-limit_smoothed = true
-position_smoothing_enabled = true
-
 [node name="EntranceMarkers" type="Node2D" parent="."]
 
 [node name="Main" type="Marker2D" parent="EntranceMarkers"]
 position = Vector2(105, 16)
+
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("7_dodpj")]
+position = Vector2(57, 109)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("7_dodpj")]
+position = Vector2(203, 106)
 
 [connection signal="body_entered" from="Map/SceneTrigger" to="Map/SceneTrigger" method="_on_body_entered"]
