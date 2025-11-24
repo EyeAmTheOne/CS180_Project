@@ -2178,7 +2178,7 @@ y_sort_enabled = true
 [node name="Borders" type="StaticBody2D" parent="Map"]
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Borders"]
+[node name="BottomBorder" type="CollisionShape2D" parent="Map/Borders"]
 position = Vector2(112, 223)
 shape = SubResource("RectangleShape2D_lquwl")
 
@@ -2190,7 +2190,7 @@ shape = SubResource("WorldBoundaryShape2D_1bvp3")
 position = Vector2(350, 21)
 shape = SubResource("WorldBoundaryShape2D_lquwl")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Borders"]
+[node name="TopBorder" type="CollisionShape2D" parent="Map/Borders"]
 position = Vector2(109, -50)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
