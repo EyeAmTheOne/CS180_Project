@@ -1,7 +1,7 @@
 [gd_scene load_steps=59 format=3 uid="uid://4v1f6nfxhn7v"]
 
 [ext_resource type="PackedScene" uid="uid://4eouovx8cr2d" path="res://inventory/InventoryUI.tscn" id="3_wnvi2"]
-[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="4_83hs8"]
+[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="16_inv"]
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
 [ext_resource type="Texture2D" uid="uid://dvioeg68lyb7l" path="res://assets/art/Soldier with shadows/Soldier-Death.png" id="2_aqcbf"]
@@ -412,7 +412,7 @@ shape = SubResource("CircleShape2D_mhpjh")
 [node name="InventoryUI" parent="." instance=ExtResource("3_wnvi2")]
 
 [node name="Inventory" type="Node" parent="."]
-script = ExtResource("4_83hs8")
+script = ExtResource("16_inv")
 
 [node name="Player_Health" type="Node" parent="."]
 script = ExtResource("3_83hs8")
