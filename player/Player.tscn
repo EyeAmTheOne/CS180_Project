@@ -1,5 +1,7 @@
-[gd_scene load_steps=57 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=59 format=3 uid="uid://4v1f6nfxhn7v"]
 
+[ext_resource type="PackedScene" uid="uid://4eouovx8cr2d" path="res://inventory/InventoryUI.tscn" id="3_wnvi2"]
+[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="16_inv"]
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
 [ext_resource type="Texture2D" uid="uid://dvioeg68lyb7l" path="res://assets/art/Soldier with shadows/Soldier-Death.png" id="2_aqcbf"]
@@ -392,7 +394,7 @@ shadow_size = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2m0d2"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_3c3w1")
@@ -406,7 +408,11 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mhpjh")
-debug_color = Color(0.5764706, 0.45882353, 0.007843138, 0.41960785)
+
+[node name="InventoryUI" parent="." instance=ExtResource("3_wnvi2")]
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("16_inv")
 
 [node name="Player_Health" type="Node" parent="."]
 script = ExtResource("3_83hs8")
