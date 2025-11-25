@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dvioeg68lyb7l" path="res://assets/art/Soldier with shadows/Soldier-Death.png" id="2_aqcbf"]
 [ext_resource type="Texture2D" uid="uid://5dwt01tqp064" path="res://assets/art/Soldier with shadows/Soldier-Attack01.png" id="2_gskgj"]
 [ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="3_83hs8"]
+[ext_resource type="PackedScene" uid="uid://4eouovx8cr2d" path="res://inventory/InventoryUI.tscn" id="3_wnvi2"]
 [ext_resource type="Texture2D" uid="uid://cys27dqxvupja" path="res://assets/art/Soldier with shadows/Soldier-Walk.png" id="3_x8kxw"]
 [ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="4_83hs8"]
 [ext_resource type="Texture2D" uid="uid://br8302mrj1acm" path="res://assets/art/Soldier with shadows/Soldier-Hurt.png" id="4_mhpjh"]
@@ -17,6 +18,7 @@
 [ext_resource type="FontFile" uid="uid://bilaty3p683kh" path="res://assets/fonts/ari-w9500-condensed-display.ttf" id="13_w24id"]
 [ext_resource type="Script" uid="uid://bes8dh2r3ud7s" path="res://ui/Game Over/retry_button.gd" id="14_uewl2"]
 [ext_resource type="Script" uid="uid://ygtxc63b0hp8" path="res://ui/Game Over/menu_button.gd" id="15_ofhxi"]
+[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="16_inv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu5hk"]
 atlas = ExtResource("2_gskgj")
@@ -395,6 +397,7 @@ shadow_size = 5
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2m0d2"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+process_mode = 3
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_3c3w1")
@@ -476,6 +479,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GameOverScreen" type="CanvasLayer" parent="."]
 process_mode = 2
+visible = false
 script = ExtResource("11_v4f8b")
 
 [node name="Panel" type="Panel" parent="GameOverScreen"]
