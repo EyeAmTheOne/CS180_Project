@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var speed = 100
 @export var player_active : bool = true
@@ -79,8 +79,12 @@ func _physics_process(delta):
 				animated_sprite.play("idle")
 	else:
 		if !player_dead:
+			if stun:
+				stun = false
+				animated_player.stop()
 			animated_sprite.play("death")
 			player_dead = true
+
 
 func attack_animation():
 	if current_attack:
@@ -100,11 +104,10 @@ func _try_interact() -> void:
 		if target.has_method("harvest"):
 			target.harvest(self)
 			return
-#### Diego code ends here
 
 func _on_player_health_health_depleted() -> void:
 	player_active = false
-	print("YOU HAVE DIED")
+	get_node("./GameOverScreen").game_over()
 
 func _on_hurt_box_received_damage(damage: int) -> void:
 	if player_active:
