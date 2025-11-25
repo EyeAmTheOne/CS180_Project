@@ -22,12 +22,12 @@ func get_input():
 	velocity = input_direction * speed
 
 func get_orientation():
-	if velocity[0] > 0:
+	if velocity[0] > 0 and !current_attack:
 		# Look left
 		animated_sprite.flip_h = false
 		# Flip weapon hitbox to the left
 		hitbox.position[0] = abs(hitbox.position[0])
-	elif velocity[0] < 0:
+	elif velocity[0] < 0 and !current_attack:
 		# Look right
 		animated_sprite.flip_h = true
 		# Flip weapon hitbox to the right
@@ -124,6 +124,7 @@ func get_inventory():
 func cancel_attack():
 	if current_attack:
 		current_attack = false
+		hitbox.disabled = true
 		animated_player.stop()
 		
 # Diego: show UI popup when picking up items
