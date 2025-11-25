@@ -1,7 +1,5 @@
-[gd_scene load_steps=59 format=3 uid="uid://4v1f6nfxhn7v"]
+[gd_scene load_steps=61 format=3 uid="uid://4v1f6nfxhn7v"]
 
-[ext_resource type="PackedScene" uid="uid://4eouovx8cr2d" path="res://inventory/InventoryUI.tscn" id="3_wnvi2"]
-[ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="16_inv"]
 [ext_resource type="Script" uid="uid://cfq5yl3bd6y31" path="res://player/player.gd" id="1_3c3w1"]
 [ext_resource type="Texture2D" uid="uid://cmghk6kjvg46t" path="res://assets/art/Soldier with shadows/Soldier.png" id="1_ulp21"]
 [ext_resource type="Texture2D" uid="uid://dvioeg68lyb7l" path="res://assets/art/Soldier with shadows/Soldier-Death.png" id="2_aqcbf"]
@@ -15,10 +13,12 @@
 [ext_resource type="Script" uid="uid://cy0stvbbrrcb1" path="res://ui/ui.gd" id="10_ndjxb"]
 [ext_resource type="Script" uid="uid://bi1npit5ir82" path="res://ui/Game Over/game_over_screen.gd" id="11_v4f8b"]
 [ext_resource type="FontFile" uid="uid://ybsfhbty51py" path="res://assets/fonts/ari-w9500.ttf" id="12_t8epa"]
+[ext_resource type="Script" uid="uid://6mdggo1bhx5b" path="res://player/health_bar.gd" id="12_uewl2"]
 [ext_resource type="FontFile" uid="uid://bilaty3p683kh" path="res://assets/fonts/ari-w9500-condensed-display.ttf" id="13_w24id"]
 [ext_resource type="Script" uid="uid://bes8dh2r3ud7s" path="res://ui/Game Over/retry_button.gd" id="14_uewl2"]
 [ext_resource type="Script" uid="uid://ygtxc63b0hp8" path="res://ui/Game Over/menu_button.gd" id="15_ofhxi"]
 [ext_resource type="Script" uid="uid://jjnau4bt7xlg" path="res://inventory/Inventory.gd" id="16_inv"]
+[ext_resource type="Texture2D" uid="uid://5tofg2yhhm2g" path="res://assets/art/Heart/pixel_heart.png" id="19_ofhxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu5hk"]
 atlas = ExtResource("2_gskgj")
@@ -409,6 +409,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mhpjh")
 
@@ -427,6 +428,7 @@ libraries = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 monitoring = false
@@ -446,6 +448,7 @@ health = NodePath("../Player_Health")
 metadata/_custom_type_script = "uid://bx0xax2hj2eva"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_x8kxw")
 debug_color = Color(0.37254903, 0.47843137, 1, 0.41960785)
@@ -455,6 +458,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="InteractArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 position = Vector2(0, -5)
@@ -568,10 +572,33 @@ wait_time = 1.25
 [node name="GameOverScreenShowUpTimer" type="Timer" parent="GameOverScreen/Panel/HBoxContainer"]
 wait_time = 1.5
 
+[node name="PlayerStatsUI" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" type="Panel" parent="PlayerStatsUI"]
+layout_direction = 1
+
+[node name="HealthBar" type="ProgressBar" parent="PlayerStatsUI/HealthUI"]
+modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 10.0
+offset_right = 313.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 8
+value = 100.0
+allow_greater = true
+show_percentage = false
+script = ExtResource("12_uewl2")
+
+[node name="PixelHeart" type="Sprite2D" parent="PlayerStatsUI/HealthUI"]
+position = Vector2(25, 20)
+texture = ExtResource("19_ofhxi")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="health_depleted" from="Player_Health" to="." method="_on_player_health_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="received_damage" from="HurtBox" to="." method="_on_hurt_box_received_damage"]
+[connection signal="received_damage" from="HurtBox" to="PlayerStatsUI/HealthUI/HealthBar" method="_on_hurt_box_received_damage"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
 [connection signal="pressed" from="GameOverScreen/Panel/HBoxContainer/RetryButton" to="GameOverScreen" method="_on_retry_button_pressed"]
 [connection signal="timeout" from="GameOverScreen/Panel/HBoxContainer/RetryButton/RetryButtonShowUpTimer" to="GameOverScreen/Panel/HBoxContainer/RetryButton" method="_on_retry_button_show_up_timer_timeout"]

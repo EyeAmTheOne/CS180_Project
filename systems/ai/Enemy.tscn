@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b413ipsgp3sfv"]
+[gd_scene load_steps=48 format=3 uid="uid://b413ipsgp3sfv"]
 
 [ext_resource type="Texture2D" uid="uid://mvb417pd2lqb" path="res://assets/art/Orc with shadows/Orc-Idle.png" id="1_nbgo0"]
 [ext_resource type="Script" uid="uid://fqb4iosioeg0" path="res://systems/ai/enemy.gd" id="1_uf005"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bl7jd0cbw38h" path="res://systems/health/health.gd" id="6_cx27q"]
 [ext_resource type="Script" uid="uid://byagfnhocne4h" path="res://systems/health/hitbox.gd" id="7_axoif"]
 [ext_resource type="Script" uid="uid://bx0xax2hj2eva" path="res://systems/health/hurtbox.gd" id="8_2vaor"]
+[ext_resource type="Script" uid="uid://6mdggo1bhx5b" path="res://player/health_bar.gd" id="10_av8sf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2vaor"]
 atlas = ExtResource("2_s3yrj")
@@ -345,33 +346,6 @@ tracks/2/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_iac14"]
-resource_name = "Hurt"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Hurt"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.03333336, 0.33333337, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0, 2, 2, 3]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2vaor"]
 _data = {
 &"Attack": SubResource("Animation_axoif"),
@@ -447,10 +421,35 @@ autostart = true
 [node name="KeepBody" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="EnemyStats" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 15.0
+
+[node name="Panel2" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 5.0
+
+[node name="HealthBar" type="ProgressBar" parent="Panel/Panel2"]
+modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 8
+value = 100.0
+allow_greater = true
+show_percentage = false
+script = ExtResource("10_av8sf")
+
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
 [connection signal="health_depleted" from="Enemy_Health" to="." method="_on_enemy_health_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="received_damage" from="HurtBox" to="." method="_on_hurt_box_received_damage"]
+[connection signal="received_damage" from="HurtBox" to="Panel/Panel2/HealthBar" method="_on_hurt_box_received_damage"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="KeepBody" to="." method="_on_keep_body_timeout"]
