@@ -124,6 +124,7 @@ func get_inventory():
 func cancel_attack():
 	if current_attack:
 		current_attack = false
+		hitbox.disabled = true
 		animated_player.stop()
 		
 # Diego: show UI popup when picking up items
