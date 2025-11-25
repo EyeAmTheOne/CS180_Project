@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=22 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
@@ -6,7 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://djhv0f3oxcglr" path="res://core/scene_trigger.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://0sbh4k7pxmh2" path="res://world/resources/chest1.tscn" id="5_4c57u"]
+[ext_resource type="PackedScene" uid="uid://c554asfb4pjcm" path="res://world/resources/coal.tscn" id="6_efxa6"]
 [ext_resource type="Script" path="res://player/PlayerCamera.gd" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://b3sxbxfksydtf" path="res://world/resources/metal.tscn" id="7_dg77c"]
+[ext_resource type="PackedScene" uid="uid://meyktyfvtqk3" path="res://world/resources/tree.tscn" id="8_efxa6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
 
@@ -2211,6 +2215,18 @@ tile_set = SubResource("TileSet_7mycd")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAJAAMAAAADAAEAAAALAAcAAAADAAEAAAABAAcAAAADAAEAAAADAAUAAAADAAEAAAAMAAMAAAADAAEAAAAKAAEAAAADAAEAAAABAAQAAAAJAAIAAAD+/wIAAAAJAAIAAAD8/wYAAAAJAAIAAAABAAsAAAADAAEAAAD4/wcAAAAJAAIAAAD8//z/AAAJAAIAAAASAPz/AAAJAAIAAAALAPz/AAAJAAIAAAAKAPz/AAAJAAIAAAAVAP7/AAAJAAIAAAASAAsAAAADAAEAAAAMAAoAAAAJAAIAAAAVAP3/AAAAAAEAAAARAPz/AAAAAAEAAAAPAPz/AAAAAAEAAAAEAP7/AAAAAAEAAAD8/wMAAAAAAAEAAAD//wYAAAAAAAEAAAD3/wYAAAAAAAEAAAD2/w0AAAAAAAEAAAD9/w0AAAAAAAEAAAAQAAsAAAAAAAEAAAAWAAcAAAAAAAEAAAAWAAMAAAAAAAEAAAD///3/AAADAAEAAAANAAkAAAADAAEAAAAXAAQAAAADAAEAAAARAP//AAADAAEAAAACAPv/AAADAAEAAAD2//z/AAADAAEAAAD6/wUAAAAMAAEAAAD9////AAAMAAEAAAAOAAkAAAAMAAEAAAAWAAAAAAAMAAEAAAASAAYAAAANAAIAAAAUAAkAAAANAAIAAAD6/wMAAAALAAAAAAD7//r/AAALAAAAAAATAP7/AAALAAAAAAATAAMAAAAMAAIAAAD8/woAAAAMAAIAAAD4/wsAAAANAAIAAAAMAAwAAAADAAEAAAANAAwAAAAAAAEAAAAOAAwAAAADAAEAAAAPAAwAAAADAAEAAAAQAAwAAAADAAEAAAARAAwAAAAAAAEAAAASAAwAAAAAAAEAAAATAAwAAAADAAEAAAAUAAwAAAADAAEAAAAVAAwAAAADAAEAAAAWAAwAAAADAAEAAAAWAAsAAAADAAEAAAAVAAsAAAAAAAEAAAAUAAsAAAAAAAEAAAATAAsAAAADAAEAAAAEAAwAAAAAAAEAAAADAAwAAAAAAAEAAAACAAwAAAADAAEAAAABAAwAAAADAAEAAAACAAsAAAADAAEAAAACAAoAAAADAAEAAAAAAAwAAAADAAEAAAADAA0AAAADAAEAAAACAA0AAAADAAEAAAD//wwAAAADAAEAAAD//wsAAAADAAEAAAAMAA0AAAAAAAEAAAALAA0AAAAAAAEAAAAKAA0AAAAAAAEAAAAKAAwAAAADAAEAAAAJAAwAAAADAAEAAAALAAwAAAAAAAEAAAAJAA0AAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_5vw27")
+
+[node name="chest" parent="Map/EnvironmentLayer" instance=ExtResource("5_4c57u")]
+position = Vector2(250, 300)
+
+[node name="coal" parent="Map/EnvironmentLayer" instance=ExtResource("6_efxa6")]
+position = Vector2(150, 150)
+
+[node name="metal" parent="Map/EnvironmentLayer" instance=ExtResource("7_dg77c")]
+position = Vector2(200, 200)
+
+[node name="tree" parent="Map/EnvironmentLayer" instance=ExtResource("8_efxa6")]
+position = Vector2(250, 250)
 
 [node name="SceneTrigger" parent="Map" instance=ExtResource("3_lquwl")]
 connected_scene = "res://world/World.tscn"

@@ -5,12 +5,13 @@ class_name Player extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animated_player = $AnimationPlayer
 @onready var hitbox = $HitBox/CollisionShape2D
+@onready var inventory = $Inventory  # ADD THIS LINE
 
 var player_dead : bool = false
 var current_attack : bool = false
 var stun : bool = false
 
-# Diego resources
+# Diego resources - kept for compatibility, synced with inventory
 var wood: int = 0
 var coal: int = 0
 var gold: int = 0
@@ -32,24 +33,40 @@ func get_orientation():
 		# Flip weapon hitbox to the right
 		hitbox.position[0] = -abs(hitbox.position[0])
 
-# Diego: resource gain + popup
+# Diego: resource gain + popup - NOW SYNCED WITH INVENTORY
 func add_wood(amount: int) -> void:
-	wood += amount
+	if inventory:
+		inventory.add_item("wood", amount)
+		wood = inventory.get_item_quantity("wood")
+	else:
+		wood += amount
 	print("Picked up ", amount, " wood (Total: ", wood, ")")
 	_show_pickup_popup("+%d wood" % amount)
 
 func add_coal(amount: int) -> void:
-	coal += amount
+	if inventory:
+		inventory.add_item("coal", amount)
+		coal = inventory.get_item_quantity("coal")
+	else:
+		coal += amount
 	print("Picked up ", amount, " coal (Total: ", coal, ")")
 	_show_pickup_popup("+%d coal" % amount)
 
 func add_gold(amount: int) -> void:
-	gold += amount
+	if inventory:
+		inventory.add_item("gold", amount)
+		gold = inventory.get_item_quantity("gold")
+	else:
+		gold += amount
 	print("Picked up ", amount, " gold (Total: ", gold, ")")
 	_show_pickup_popup("+%d gold" % amount)
 
 func add_metal(amount: int) -> void:
-	metal += amount
+	if inventory:
+		inventory.add_item("metal", amount)
+		metal = inventory.get_item_quantity("metal")
+	else:
+		metal += amount
 	print("Picked up ", amount, " metal (Total: ", metal, ")")
 	_show_pickup_popup("+%d metal" % amount)
 
@@ -84,7 +101,6 @@ func _physics_process(delta):
 			animated_sprite.play("death")
 			player_dead = true
 
-
 func attack_animation():
 	if current_attack:
 		animated_player.play("Attack")
@@ -103,7 +119,7 @@ func _try_interact() -> void:
 		if target.has_method("harvest"):
 			target.harvest(self)
 			return
-	
+
 func _on_player_health_health_depleted() -> void:
 	player_active = false
 	get_node("./GameOverScreen").game_over()

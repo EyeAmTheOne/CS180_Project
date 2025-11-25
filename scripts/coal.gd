@@ -1,5 +1,6 @@
 extends Node2D
-#same code as the tree nothing new 
+# Same code as the tree nothing new 
+
 var rng := RandomNumberGenerator.new()
 @export var respawn_time := 10
 
@@ -8,9 +9,13 @@ func _ready():
 
 func harvest(player):
 	var amount = get_random_coal_amount()
+	
+	# Add to player's inventory
 	player.add_coal(amount)
+	
 	hide()
 	disable_collisions()
+	
 	var t = Timer.new()
 	t.wait_time = respawn_time
 	t.one_shot = true

@@ -1,16 +1,21 @@
 extends Node2D
-## code for metal same code as tree and coal just diff name 
+# Code for metal same code as tree and coal just diff name 
+
 var rng := RandomNumberGenerator.new()
-@export var respawn_time := 10 # metal takes longer 
+@export var respawn_time := 10  # metal takes longer 
 
 func _ready():
 	rng.randomize()
 
 func harvest(player):
 	var amount = get_random_metal_amount()
+	
+	# Add to player's inventory
 	player.add_metal(amount)
+	
 	hide()
 	disable_collisions()
+	
 	var t = Timer.new()
 	t.wait_time = respawn_time
 	t.one_shot = true
