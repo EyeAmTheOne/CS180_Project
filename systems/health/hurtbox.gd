@@ -28,11 +28,12 @@ func _on_area_entered_HIT(hitbox: HitBox) -> void:
 		health.take_damage(hitbox.damage)
 		print("DAMAGED: ", hitbox.damage)
 		received_damage.emit(hitbox.damage)
-		healthbar.value = health.health
+		#healthbar.value = health.health
 		
 func _on_area_entered_HEAL(healbox: HealBox) -> void:
 	if healbox != null:
 		health.heal(healbox.healing)
 		print("HEALING: ", healbox.healing)
-		healthbar.value = health.health
+		received_healing.emit(healbox.healing)
+		#healthbar.value = health.health
 		
