@@ -345,33 +345,6 @@ tracks/2/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_iac14"]
-resource_name = "Hurt"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Hurt"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.03333336, 0.33333337, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0, 2, 2, 3]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2vaor"]
 _data = {
 &"Attack": SubResource("Animation_axoif"),
@@ -434,6 +407,17 @@ collision_mask = 2
 script = ExtResource("8_2vaor")
 health = NodePath("../Enemy_Health")
 metadata/_custom_type_script = "uid://bx0xax2hj2eva"
+
+[node name="HealthBar" type="ProgressBar" parent="HurtBox"]
+modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 8
+value = 100.0
+allow_greater = true
+show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2)
