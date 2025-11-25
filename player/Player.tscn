@@ -581,9 +581,10 @@ layout_direction = 1
 modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
 layout_mode = 0
 offset_left = 25.0
-offset_top = 10.0
+offset_top = 20.0
 offset_right = 313.0
-offset_bottom = 20.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
 theme_override_font_sizes/font_size = 8
 value = 100.0
 allow_greater = true
@@ -591,7 +592,8 @@ show_percentage = false
 script = ExtResource("12_uewl2")
 
 [node name="PixelHeart" type="Sprite2D" parent="PlayerStatsUI/HealthUI"]
-position = Vector2(25, 20)
+position = Vector2(25, 35)
+scale = Vector2(2, 2)
 texture = ExtResource("19_ofhxi")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

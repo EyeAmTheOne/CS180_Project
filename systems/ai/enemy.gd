@@ -92,6 +92,5 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 
 func cancel_attack():
 	if current_attack:
-		print("COUNTER HIT")
 		current_attack = false
 		animation_player.stop()
