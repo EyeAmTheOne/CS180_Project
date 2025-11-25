@@ -1,43 +1,27 @@
 extends Node
 
-# Stores all the item definitions for the game
 var items = {}
 
 func _ready():
 	items["wood"] = {
 		"name": "Wood",
-		"description": "Basic resource for crafting",
-		"max_stack": 99
+		"icon": "res://assets/art/small_tree.png"
 	}
-	
-	items["metal"] = {
-		"name": "Metal scrap",
-		"description": "Used for upgrades",
-		"max_stack": 99
-	}
-	
 	items["coal"] = {
 		"name": "Coal",
-		"description": "Fuel for the train",
-		"max_stack": 50
+		"icon": "res://assets/art/coal.webp"
 	}
-	
-	items["health_potion"] = {
-		"name": "Health Potion",
-		"description": "Restores health",
-		"max_stack": 10
+	items["metal"] = {
+		"name": "Metal",
+		"icon": "res://assets/art/pngtree-rock-material-vector-png-image_13459100.png"
 	}
-	
 	items["gold"] = {
-		"name": "gold",
-		"description": "Valuable currency",
-		"max_stack": 999
+		"name": "Gold",
+		"icon": "res://assets/art/gold.jpg"  
 	}
 
-func item_exists(item_name):
+func item_exists(item_name: String) -> bool:
 	return items.has(item_name)
 
-func get_item(item_name):
-	if items.has(item_name):
-		return items[item_name]
-	return null
+func get_item_data(item_name: String) -> Dictionary:
+	return items.get(item_name, {})
