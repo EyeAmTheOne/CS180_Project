@@ -576,11 +576,6 @@ wait_time = 1.5
 
 [node name="HealthUI" type="Panel" parent="PlayerStatsUI"]
 layout_direction = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="HealthBar" type="ProgressBar" parent="PlayerStatsUI/HealthUI"]
 modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
