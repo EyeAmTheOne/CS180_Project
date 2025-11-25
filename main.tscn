@@ -1,12 +1,12 @@
 [gd_scene load_steps=20 format=4 uid="uid://cqow47bch5ocs"]
 
-[ext_resource type="Script" uid="uid://bjobyb6wmrukv" path="res://main.gd" id="1_7mycd"]
+[ext_resource type="Script" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://djhv0f3oxcglr" path="res://core/scene_trigger.tscn" id="3_lquwl"]
-[ext_resource type="Script" uid="uid://ccknrgqekbvss" path="res://player/PlayerCamera.gd" id="7_272bh"]
+[ext_resource type="Script" path="res://player/PlayerCamera.gd" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://dbuvbw2pr7ubk" path="res://assets/art/train-set0.png" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bo6rernj7kc25" path="res://assets/art/train-set1.png" id="9_kek77"]
 
@@ -2164,7 +2164,7 @@ y_sort_enabled = true
 script = ExtResource("1_7mycd")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-position = Vector2(105, -32)
+position = Vector2(262, -10)
 zoom = Vector2(3, 3)
 process_callback = 0
 limit_left = -150

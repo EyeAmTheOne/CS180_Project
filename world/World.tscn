@@ -1,13 +1,15 @@
-[gd_scene load_steps=20 format=4 uid="uid://btfpx2ywg7j7f"]
+[gd_scene load_steps=22 format=4 uid="uid://btfpx2ywg7j7f"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_1tnoa"]
-[ext_resource type="Script" uid="uid://dq7boqilbwhbj" path="res://world/world.gd" id="1_5hvw7"]
-[ext_resource type="Script" uid="uid://ccknrgqekbvss" path="res://player/PlayerCamera.gd" id="2_0wlj7"]
+[ext_resource type="Script" path="res://world/world.gd" id="1_5hvw7"]
+[ext_resource type="Script" path="res://player/PlayerCamera.gd" id="2_0wlj7"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_qcaji"]
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="3_qcaji"]
 [ext_resource type="Script" uid="uid://bkx156j7tqwe0" path="res://core/scene_trigger.gd" id="4_ahhnx"]
+[ext_resource type="PackedScene" uid="uid://0sbh4k7pxmh2" path="res://world/resources/chest1.tscn" id="6_8mymi"]
+[ext_resource type="PackedScene" uid="uid://meyktyfvtqk3" path="res://world/resources/tree.tscn" id="7_0n6y5"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="7_dodpj"]
-[ext_resource type="Script" uid="uid://bcv5aq0pfr4nc" path="res://world/enemy_spawner.gd" id="8_txrfu"]
+[ext_resource type="Script" path="res://world/enemy_spawner.gd" id="8_txrfu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hvw7"]
 texture = ExtResource("2_qcaji")
@@ -4159,6 +4161,15 @@ shape = SubResource("WorldBoundaryShape2D_8mymi")
 
 [node name="TopBorder" type="CollisionShape2D" parent="Map/Borders"]
 shape = SubResource("WorldBoundaryShape2D_0n6y5")
+
+[node name="Resources" type="Node2D" parent="Map"]
+position = Vector2(-112, 102)
+
+[node name="chest" parent="Map/Resources" instance=ExtResource("6_8mymi")]
+position = Vector2(47, 53)
+
+[node name="tree" parent="Map/Resources" instance=ExtResource("7_0n6y5")]
+position = Vector2(10, 124)
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_1tnoa")]
 y_sort_enabled = true

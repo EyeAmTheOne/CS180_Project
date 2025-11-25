@@ -17,9 +17,9 @@ func harvest(player):
 	var gold_amount = roll_gold()
 
 	# Give loot to player
-	player.add_wood(wood_amount)
-	player.add_coal(coal_amount)
-	player.add_gold(gold_amount)
+	player.get_inventory().add_item("wood", wood_amount)
+	player.get_inventory().add_item("coal", coal_amount)
+	player.get_inventory().add_item("gold", gold_amount)
 
 	looted = true
 
