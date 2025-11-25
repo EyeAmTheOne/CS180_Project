@@ -82,6 +82,10 @@ func _physics_process(delta):
 			if stun:
 				stun = false
 				animated_player.stop()
+				
+			if current_attack:
+				cancel_attack()
+				
 			animated_sprite.play("death")
 			player_dead = true
 
@@ -117,6 +121,11 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 func get_inventory():
 	return inventory
 
+func cancel_attack():
+	if current_attack:
+		current_attack = false
+		animated_player.stop()
+		
 # Diego: show UI popup when picking up items
 func _show_pickup_popup(text: String) -> void:
 	var ui = get_tree().get_first_node_in_group("ui")
