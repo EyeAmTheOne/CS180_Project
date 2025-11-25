@@ -409,18 +409,6 @@ script = ExtResource("8_2vaor")
 health = NodePath("../Enemy_Health")
 metadata/_custom_type_script = "uid://bx0xax2hj2eva"
 
-[node name="HealthBar" type="ProgressBar" parent="HurtBox"]
-modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
-offset_left = -20.0
-offset_top = 8.0
-offset_right = 20.0
-offset_bottom = 13.0
-theme_override_font_sizes/font_size = 8
-value = 100.0
-allow_greater = true
-show_percentage = false
-script = ExtResource("10_av8sf")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_2vaor")
@@ -433,11 +421,35 @@ autostart = true
 [node name="KeepBody" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="EnemyStats" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 15.0
+
+[node name="Panel2" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 5.0
+
+[node name="HealthBar" type="ProgressBar" parent="Panel/Panel2"]
+modulate = Color(0.89478207, 2.4546682e-06, 7.70092e-07, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 8
+value = 100.0
+allow_greater = true
+show_percentage = false
+script = ExtResource("10_av8sf")
+
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
 [connection signal="health_depleted" from="Enemy_Health" to="." method="_on_enemy_health_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="received_damage" from="HurtBox" to="." method="_on_hurt_box_received_damage"]
-[connection signal="received_damage" from="HurtBox" to="HurtBox/HealthBar" method="_on_hurt_box_received_damage"]
+[connection signal="received_damage" from="HurtBox" to="Panel/Panel2/HealthBar" method="_on_hurt_box_received_damage"]
 [connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="KeepBody" to="." method="_on_keep_body_timeout"]
