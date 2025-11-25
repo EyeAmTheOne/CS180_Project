@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://btfpx2ywg7j7f"]
+[gd_scene load_steps=20 format=4 uid="uid://btfpx2ywg7j7f"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_1tnoa"]
 [ext_resource type="Script" uid="uid://dq7boqilbwhbj" path="res://world/world.gd" id="1_5hvw7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cecnm0qt50gpj" path="res://assets/art/roguelikeSheet_environment.png" id="3_qcaji"]
 [ext_resource type="Script" uid="uid://bkx156j7tqwe0" path="res://core/scene_trigger.gd" id="4_ahhnx"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="7_dodpj"]
+[ext_resource type="Script" uid="uid://bcv5aq0pfr4nc" path="res://world/enemy_spawner.gd" id="8_txrfu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hvw7"]
 texture = ExtResource("2_qcaji")
@@ -4177,4 +4178,13 @@ position = Vector2(57, 109)
 [node name="Enemy2" parent="Enemies" instance=ExtResource("7_dodpj")]
 position = Vector2(203, 106)
 
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("8_txrfu")
+enemy_scene = ExtResource("7_dodpj")
+
+[node name="Timer" type="Timer" parent="EnemySpawner"]
+wait_time = 3.0
+autostart = true
+
 [connection signal="body_entered" from="Map/SceneTrigger" to="Map/SceneTrigger" method="_on_body_entered"]
+[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
