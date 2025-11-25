@@ -10,7 +10,7 @@ func _ready():
 
 func harvest(player):
 	var amount = get_random_wood_amount()
-	player.add_wood(amount)
+	player.get_inventory().add_item("wood", amount)
 
 	# Hide tree and does not delete it 
 	hide()

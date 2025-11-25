@@ -1,33 +1,30 @@
 [gd_scene load_steps=5 format=3 uid="uid://meyktyfvtqk3"]
 
 [ext_resource type="Script" uid="uid://bq0juatt6tnig" path="res://scripts/tree.gd" id="1_nnvrw"]
-[ext_resource type="Texture2D" uid="uid://4l2ypltu25il" path="res://assets/art/tree11.png" id="2_gvmkm"]
+[ext_resource type="Texture2D" uid="uid://bexjaiwclt64" path="res://assets/art/small_tree.png" id="2_jn22b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nnvrw"]
-radius = 117.31726
+radius = 31.284603
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44ud8"]
-size = Vector2(27, 14)
+size = Vector2(14, 15)
 
 [node name="tree" type="Node2D"]
 script = ExtResource("1_nnvrw")
 
 [node name="Tree11" type="Sprite2D" parent="."]
-position = Vector2(-194.00002, -217.34349)
-scale = Vector2(0.08965638, 0.08553427)
-texture = ExtResource("2_gvmkm")
+texture = ExtResource("2_jn22b")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-198.75, -194.25)
 scale = Vector2(0.12785862, 0.11697721)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(21.508183, -254.32309)
+position = Vector2(7.8211384, 42.74337)
 scale = Vector2(0.9999985, 0.9999995)
 shape = SubResource("CircleShape2D_nnvrw")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-196, -205)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_44ud8")

@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animated_player = $AnimationPlayer
 @onready var hitbox = $HitBox/CollisionShape2D
+@onready var inventory = $Inventory
 
 var player_dead : bool = false
 var current_attack : bool = false
@@ -112,6 +113,9 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 	if player_active:
 		stun = true
 		animated_player.play("Hurt")
+		
+func get_inventory():
+	return inventory
 
 # Diego: show UI popup when picking up items
 func _show_pickup_popup(text: String) -> void:

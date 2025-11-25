@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://p448b8thhhhh"]
+[gd_scene load_steps=9 format=3 uid="uid://p448b8thhhhh"]
 
 [ext_resource type="Script" uid="uid://ilnkodc88eq3" path="res://ui/menus/main_menu.gd" id="1_a6crx"]
 [ext_resource type="FontFile" uid="uid://b0ljqmf6vho6y" path="res://assets/fonts/ari-w9500-display.ttf" id="1_khj84"]
+[ext_resource type="Texture2D" uid="uid://d3fajexrotdv" path="res://assets/art/Menu.png" id="2_eg7dm"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khj84"]
-bg_color = Color(0.35611454, 0.67565715, 0.52841413, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5b8rl"]
+texture = ExtResource("2_eg7dm")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmykd"]
 bg_color = Color(1, 1, 1, 1)
@@ -51,7 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_khj84")
+theme_override_styles/panel = SubResource("StyleBoxTexture_5b8rl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
