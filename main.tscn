@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=12 format=4 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="PackedScene" uid="uid://4v1f6nfxhn7v" path="res://player/Player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://did1a58w3unb7" path="res://assets/art/roguelikeSheet_transparent.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b413ipsgp3sfv" path="res://systems/ai/Enemy.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://meyktyfvtqk3" path="res://tree.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://0sbh4k7pxmh2" path="res://chest1.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://c554asfb4pjcm" path="res://coal.tscn" id="6_7mycd"]
-[ext_resource type="PackedScene" uid="uid://b3sxbxfksydtf" path="res://metal.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://meyktyfvtqk3" path="res://world/resources/tree.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cdfwah8u4kwwe" path="res://trainsimple.tscn" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://0sbh4k7pxmh2" path="res://world/resources/chest1.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c554asfb4pjcm" path="res://world/resources/coal.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b3sxbxfksydtf" path="res://world/resources/metal.tscn" id="7_272bh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
 
@@ -1837,10 +1838,10 @@ tile_map_data = PackedByteArray("AAAAAAIAAAAKABoAAAAAAAMAAAAKABoAAAAAAAQAAAAKABo
 tile_set = SubResource("TileSet_1bvp3")
 
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(175, 50)
+position = Vector2(225, 79)
 
 [node name="tree2" parent="." instance=ExtResource("4_1bvp3")]
-position = Vector2(202, 335)
+position = Vector2(179, 354)
 
 [node name="tree3" parent="." instance=ExtResource("4_1bvp3")]
 position = Vector2(424, 346)
@@ -1849,12 +1850,15 @@ position = Vector2(424, 346)
 position = Vector2(426, 209)
 
 [node name="chest" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(214, 243)
+position = Vector2(353, 165.00002)
 scale = Vector2(0.6, 0.6)
 
 [node name="coal" parent="." instance=ExtResource("6_7mycd")]
-position = Vector2(266, 207)
+position = Vector2(209, 295)
 
 [node name="metal" parent="." instance=ExtResource("7_272bh")]
-position = Vector2(646, 723)
+position = Vector2(743, 794)
 scale = Vector2(3, 3)
+
+[node name="trainsimple" parent="." instance=ExtResource("5_5vw27")]
+position = Vector2(-264, 54)

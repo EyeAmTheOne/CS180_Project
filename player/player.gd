@@ -114,4 +114,5 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 # Diego: show UI popup when picking up items
 func _show_pickup_popup(text: String) -> void:
 	var ui = get_tree().get_first_node_in_group("ui")
-	if
+	if ui:
+		ui.show_pickup_popup(text)
