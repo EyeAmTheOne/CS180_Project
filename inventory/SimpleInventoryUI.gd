@@ -29,11 +29,11 @@ func update_hotbar():
 	
 	for i in range(9):
 		var slot = Panel.new()
-		slot.custom_minimum_size = Vector2(50, 50)
+		slot.custom_minimum_size = Vector2(80, 80)
 		
 		# Style
 		var style = StyleBoxFlat.new()
-		style.bg_color = Color(0.3, 0.3, 0.3)
+		style.bg_color = Color(0.397, 0.397, 0.397, 1.0)
 		style.border_width_left = 2
 		style.border_width_right = 2
 		style.border_width_top = 2
@@ -45,20 +45,23 @@ func update_hotbar():
 		if i < items.size():
 			var item = items[i]
 			
-			# Item name at top
-			var name_label = Label.new()
-			name_label.text = item.get_name()
-			name_label.position = Vector2(5, 5)
-			name_label.add_theme_font_size_override("font_size", 10)
-			name_label.add_theme_color_override("font_color", Color(1, 1, 1))
-			slot.add_child(name_label)
+			# Item icon (image)
+			var icon = TextureRect.new()
+			icon.texture = load(item.get_icon())
+			icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			icon.custom_minimum_size = Vector2(50, 50)
+			icon.position = Vector2(15, 10)
+			slot.add_child(icon)
 			
-			# Item quantity in bottom right
+			# Quantity number (bottom right)
 			var qty_label = Label.new()
 			qty_label.text = str(item.get_quantity())
-			qty_label.position = Vector2(30, 30)
-			qty_label.add_theme_font_size_override("font_size", 16)
-			qty_label.add_theme_color_override("font_color", Color(1, 1, 1))
+			qty_label.position = Vector2(50, 55)
+			qty_label.add_theme_font_size_override("font_size", 20)
+			qty_label.add_theme_color_override("font_color", Color.WHITE)
+			qty_label.add_theme_color_override("font_outline_color", Color.BLACK)
+			qty_label.add_theme_constant_override("outline_size", 2)
 			slot.add_child(qty_label)
 		
 		hotbar.add_child(slot)
