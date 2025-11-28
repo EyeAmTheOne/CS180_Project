@@ -40,25 +40,28 @@ func get_orientation():
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
+	var direction = Vector2(0, 0)
 	match current_state:
 		EnemyState.Dead:
 			return
+		EnemyState.Hurt:
+			velocity = direction * SPEED
+			get_orientation()
+			move_and_slide()
 		_:
 			if enemy_active:
 				# If target exists, move towards target
-				var direction = Vector2(0, 0)
-				if !stun:
-					if target:
-						if position.distance_to(target.position) > 20:
-							cancel_attack()
-							animated_sprite.play("Walk")
-							direction = position.direction_to(target.position)
-						elif !current_attack:
-							current_attack = true
-							animation_player.play("Attack")
-					else:
+				if target:
+					if position.distance_to(target.position) > 20:
 						cancel_attack()
-						animated_sprite.play("Idle")
+						animated_sprite.play("Walk")
+						direction = position.direction_to(target.position)
+					elif !current_attack:
+						current_attack = true
+						animation_player.play("Attack")
+				else:
+					cancel_attack()
+					animated_sprite.play("Idle")
 					
 				velocity = direction * SPEED
 				get_orientation()
@@ -83,11 +86,15 @@ func _on_enemy_health_health_depleted() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Attack":
-		current_attack = false
-	elif anim_name == "Hurt":
-		stun = false
-		current_attack = false
+	match current_state:
+		EnemyState.Hurt:
+			if anim_name == "Hurt":
+				change_state(EnemyState.Chasing)
+				current_attack = false
+		_:
+			if anim_name == "Attack":
+				current_attack = false
+	
 
 
 func _on_keep_body_timeout() -> void:
@@ -97,8 +104,8 @@ func _on_keep_body_timeout() -> void:
 func _on_hurt_box_received_damage(damage: int) -> void:
 	if enemy_active:
 		cancel_attack()
-		stun = true
-		animation_player.play("Hurt")
+		change_state(EnemyState.Hurt)
+
 
 func cancel_attack():
 	if current_attack:
@@ -106,9 +113,13 @@ func cancel_attack():
 		hitbox.disabled = true
 		animation_player.stop()
 		
+		
 func change_state(new_state: EnemyState):
 	current_state = new_state
 	match current_state:
 		EnemyState.Dead:
 			animated_sprite.play("Death")
 			$KeepBody.start()
+		EnemyState.Hurt:
+			animation_player.play("Hurt")
+			
