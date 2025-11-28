@@ -5,9 +5,18 @@ extends CharacterBody2D
 @onready var character = $"."
 @onready var hitbox = $HitBox/CollisionShape2D
 
+enum EnemyState {
+	Attacking,
+	Chasing,
+	Idle,
+	Dead,
+	Hurt
+}
+
+var current_state: EnemyState = EnemyState.Idle
+
 const SPEED = 50
 
-var enemy_dead : bool = false
 var current_attack : bool = false
 var stun : bool = false
 var target = null
@@ -31,32 +40,33 @@ func get_orientation():
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
-	if enemy_active:
-		# If target exists, move towards target
-		var direction = Vector2(0, 0)
-		if !stun:
-			if target:
-				if position.distance_to(target.position) > 20:
-					cancel_attack()
-					animated_sprite.play("Walk")
-					direction = position.direction_to(target.position)
-				elif !current_attack:
-					current_attack = true
-					animation_player.play("Attack")
+	match current_state:
+		EnemyState.Dead:
+			return
+		_:
+			if enemy_active:
+				# If target exists, move towards target
+				var direction = Vector2(0, 0)
+				if !stun:
+					if target:
+						if position.distance_to(target.position) > 20:
+							cancel_attack()
+							animated_sprite.play("Walk")
+							direction = position.direction_to(target.position)
+						elif !current_attack:
+							current_attack = true
+							animation_player.play("Attack")
+					else:
+						cancel_attack()
+						animated_sprite.play("Idle")
+					
+				velocity = direction * SPEED
+				get_orientation()
+				move_and_slide()
+				
 			else:
 				cancel_attack()
-				animated_sprite.play("Idle")
-			
-		velocity = direction * SPEED
-		get_orientation()
-		move_and_slide()
-		
-	else:
-		if !enemy_dead:
-			cancel_attack()
-			animated_sprite.play("Death")
-			$KeepBody.start()
-			enemy_dead = true
+				change_state(EnemyState.Dead)
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
@@ -95,3 +105,10 @@ func cancel_attack():
 		current_attack = false
 		hitbox.disabled = true
 		animation_player.stop()
+		
+func change_state(new_state: EnemyState):
+	current_state = new_state
+	match current_state:
+		EnemyState.Dead:
+			animated_sprite.play("Death")
+			$KeepBody.start()
