@@ -275,7 +275,7 @@ tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.385, 0.76666665),
+"times": PackedFloat32Array(0.385, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -344,7 +344,7 @@ script = ExtResource("1_uf005")
 sprite_frames = SubResource("SpriteFrames_2vaor")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 3
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
