@@ -22,14 +22,14 @@ var target = null
 func set_target(player: Node2D):
 	target = player
 	
-func get_orientation():
-	if velocity[0] > 0:
+func get_orientation(direction: Vector2):
+	if direction[0] > 0:
 		# Look left
 		animated_sprite.flip_h = false
 		#Flip weapon hitbox to be on left side
 		hitbox.position[0] = abs(hitbox.position[0])
 
-	elif velocity[0] < 0:
+	elif direction[0] < 0:
 		# Look right
 		animated_sprite.flip_h = true
 		# Flip weapon hitbox to be on right side
@@ -39,31 +39,28 @@ func get_orientation():
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	var direction = Vector2(0, 0)
+	velocity = Vector2(0, 0)
 	match current_state:
 		EnemyState.Dead:
 			return
-		EnemyState.Hurt:
-			velocity = direction * SPEED
-			get_orientation()
-			move_and_slide()
-		EnemyState.Attacking:
-			velocity = direction * SPEED
-			get_orientation()
-			move_and_slide()
-		_:
-			# If target exists, move towards target
+		EnemyState.Idle:
 			if target:
-				if position.distance_to(target.position) > 20:
-					animated_sprite.play("Walk")
-					direction = position.direction_to(target.position)
-				else:
-					change_state(EnemyState.Attacking)
+				change_state(EnemyState.Chasing)
+		EnemyState.Chasing:
+			# If target exists, move towards target
+			if !target:
+				change_state(EnemyState.Idle)
 			else:
-				animated_sprite.play("Idle")
+				if position.distance_to(target.position) > 20:
+					direction = position.direction_to(target.position)
+					velocity = direction * SPEED
+				else:
+					direction = position.direction_to(target.position)
+					change_state(EnemyState.Attacking)
 				
-			velocity = direction * SPEED
-			get_orientation()
-			move_and_slide()
+	
+	get_orientation(direction)
+	move_and_slide()
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
@@ -100,13 +97,6 @@ func _on_hurt_box_received_damage(damage: int) -> void:
 			return
 		_:
 			change_state(EnemyState.Hurt)
-
-
-#func cancel_attack():
-	#if current_attack:
-		#current_attack = false
-		#hitbox.disabled = true
-		#animation_player.stop()
 		
 
 func exit_state(old_state: EnemyState):
@@ -129,4 +119,8 @@ func change_state(new_state: EnemyState):
 			animation_player.play("Hurt")
 		EnemyState.Attacking:
 			animation_player.play("Attack")
+		EnemyState.Chasing:
+			animated_sprite.play("Walk")
+		EnemyState.Idle:
+			animated_sprite.play("Idle")
 			
