@@ -1,5 +1,4 @@
 extends CharacterBody2D
-@export var enemy_active : bool = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var character = $"."
@@ -17,7 +16,6 @@ var current_state: EnemyState = EnemyState.Idle
 
 const SPEED = 50
 
-var current_attack : bool = false
 var stun : bool = false
 var target = null
 
@@ -48,28 +46,24 @@ func _physics_process(delta: float) -> void:
 			velocity = direction * SPEED
 			get_orientation()
 			move_and_slide()
+		EnemyState.Attacking:
+			velocity = direction * SPEED
+			get_orientation()
+			move_and_slide()
 		_:
-			if enemy_active:
-				# If target exists, move towards target
-				if target:
-					if position.distance_to(target.position) > 20:
-						cancel_attack()
-						animated_sprite.play("Walk")
-						direction = position.direction_to(target.position)
-					elif !current_attack:
-						current_attack = true
-						animation_player.play("Attack")
+			# If target exists, move towards target
+			if target:
+				if position.distance_to(target.position) > 20:
+					animated_sprite.play("Walk")
+					direction = position.direction_to(target.position)
 				else:
-					cancel_attack()
-					animated_sprite.play("Idle")
-					
-				velocity = direction * SPEED
-				get_orientation()
-				move_and_slide()
-				
+					change_state(EnemyState.Attacking)
 			else:
-				cancel_attack()
-				change_state(EnemyState.Dead)
+				animated_sprite.play("Idle")
+				
+			velocity = direction * SPEED
+			get_orientation()
+			move_and_slide()
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
@@ -82,7 +76,7 @@ func _on_detection_body_exited(body: Node2D) -> void:
 
 
 func _on_enemy_health_health_depleted() -> void:
-	enemy_active = false
+	change_state(EnemyState.Dead)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -90,10 +84,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		EnemyState.Hurt:
 			if anim_name == "Hurt":
 				change_state(EnemyState.Chasing)
-				current_attack = false
-		_:
+		EnemyState.Attacking:
 			if anim_name == "Attack":
-				current_attack = false
+				change_state(EnemyState.Chasing)
 	
 
 
@@ -102,24 +95,38 @@ func _on_keep_body_timeout() -> void:
 
 
 func _on_hurt_box_received_damage(damage: int) -> void:
-	if enemy_active:
-		cancel_attack()
-		change_state(EnemyState.Hurt)
+	match current_state:
+		EnemyState.Dead:
+			return
+		_:
+			change_state(EnemyState.Hurt)
 
 
-func cancel_attack():
-	if current_attack:
-		current_attack = false
-		hitbox.disabled = true
-		animation_player.stop()
+#func cancel_attack():
+	#if current_attack:
+		#current_attack = false
+		#hitbox.disabled = true
+		#animation_player.stop()
 		
+
+func exit_state(old_state: EnemyState):
+	match current_state:
+		EnemyState.Attacking:
+			animation_player.play("RESET")
+		_:
+			pass
+
 		
 func change_state(new_state: EnemyState):
+	exit_state(current_state)
 	current_state = new_state
 	match current_state:
 		EnemyState.Dead:
 			animated_sprite.play("Death")
+			#hitbox.queue_free()
 			$KeepBody.start()
 		EnemyState.Hurt:
 			animation_player.play("Hurt")
+		EnemyState.Attacking:
+			animation_player.play("Attack")
 			
