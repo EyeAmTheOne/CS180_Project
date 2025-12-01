@@ -20,6 +20,10 @@ config/icon="res://assets/art/icon.svg"
 scene_manager="*res://core/scene_manager.gd"
 ItemDatabase="*res://inventory/ItemDatabase.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [global_group]
 
 Player=""

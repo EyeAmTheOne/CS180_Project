@@ -19,6 +19,11 @@ func _ready():
 		"name": "Gold",
 		"icon": "res://assets/art/gold.jpg"  
 	}
+	
+	items["health_potion"] = {
+	"name": "Health Potion",
+	"icon": "res://assets/art/chest.jpg"  # placeholder
+}
 
 func item_exists(item_name: String) -> bool:
 	return items.has(item_name)
