@@ -24,7 +24,7 @@ func add_item(item_name, amount = 1):
 	if items.has(item_name):
 		items[item_name].add(amount)
 		print("Added ", amount, " ", item_name)
-		emit_signal("inventory_changed")  # ADD THIS
+		emit_signal("inventory_changed")
 		return true
 	
 	# Check if we have room for a new item type
@@ -36,7 +36,7 @@ func add_item(item_name, amount = 1):
 	var new_item = Item.new(item_name, amount)
 	items[item_name] = new_item
 	print("Added ", amount, " ", item_name)
-	emit_signal("inventory_changed")  # ADD THIS
+	emit_signal("inventory_changed")
 	return true
 
 func remove_item(item_name, amount = 1):
@@ -56,7 +56,7 @@ func remove_item(item_name, amount = 1):
 		items.erase(item_name)
 	
 	print("Removed ", amount, " ", item_name)
-	emit_signal("inventory_changed")  # ADD THIS
+	emit_signal("inventory_changed")
 	return true
 
 func has_item(item_name, amount = 1):
@@ -87,5 +87,5 @@ func print_inventory():
 		print("Empty")
 	else:
 		for inventory_item in items.values():
-			print(inventory_item.get_name(), ": ", inventory_item.get_quantity())
+			print(inventory_item.get_item_name(), ": ", inventory_item.get_quantity())  # FIXED!
 	print("================")
