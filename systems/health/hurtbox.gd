@@ -16,7 +16,7 @@ func _ready():
 	connect("area_entered", _on_area_entered_HIT)
 	connect("area_entered", _on_area_entered_HEAL)
 	
-	$Timer.start()
+	# $Timer.start() # Debug timer to print health every 5 seconds
 	
 
 func _on_timer_timeout() -> void:
@@ -26,14 +26,12 @@ func _on_timer_timeout() -> void:
 func _on_area_entered_HIT(hitbox: HitBox) -> void:
 	if hitbox != null:
 		health.take_damage(hitbox.damage)
-		print("DAMAGED: ", hitbox.damage)
 		received_damage.emit(hitbox.damage)
 		#healthbar.value = health.health
 		
 func _on_area_entered_HEAL(healbox: HealBox) -> void:
 	if healbox != null:
 		health.heal(healbox.healing)
-		print("HEALING: ", healbox.healing)
 		received_healing.emit(healbox.healing)
 		#healthbar.value = health.health
 		
