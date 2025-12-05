@@ -13,8 +13,10 @@ func before_each():
 	add_child(inventory)
 
 func after_each():
+	for item in inventory.get_all_items():
+		inventory.remove_item(item, inventory.get_item_quantity(item))
+	inventory.free()
 	# GUT handles cleanup automatically with add_child_autofree
-	pass
 
 # Test 1: Adding a single item
 func test_add_single_item():
